@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+config/config.toml
+config/website.config
 
 # C extensions
 *.so
