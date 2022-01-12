@@ -1,0 +1,2 @@
+# Badb
+Discord moderation bot
