@@ -75,7 +75,7 @@ class dbHandler:
         return True
 
 
-class logging:
+class logging(commands.Cog):
     """Message Logging!"""
 
     def __init__(self, bot):

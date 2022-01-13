@@ -18,7 +18,7 @@ except:
             goslateInstalled = False
 
 
-class Translator:
+class Translator(commands.Cog):
     """Translate text using google translate."""
 
     def __init__(self, bot):
