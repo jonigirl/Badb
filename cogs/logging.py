@@ -148,10 +148,10 @@ class logging(commands.Cog):
         print("Logs older than 30 days deleted.")
 
 
-def check_folders():
-    if not os.path.exists(".logs.db"):
-        print("Creating data/Logging file...")
-        os.makedirs(".logs.db")
+# def check_folders():
+#     if not os.path.exists("./.logs.db"):
+#         print("Creating data/Logging file...")
+#         os.makedirs(".logs.db")
 
 
 def setup(bot):
