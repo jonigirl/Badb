@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from vbu import checks
+import checks
 import os
 
 import sqlite3
