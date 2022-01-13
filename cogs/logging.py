@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from voxelbotutils import checks
-# from cogs.utils import checks
+import voxelbotutils
+from cogs.utils import checks
 import os
 
 import sqlite3
