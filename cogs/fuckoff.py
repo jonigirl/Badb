@@ -32,7 +32,7 @@ class fuckoff(commands.Cog):
         await ctx.send("{} {}.\n\nBy yours truly {}.".format(randchoice(self.foffmsg), item, ctx.message.author.mention))
 
     @commands.command(pass_context=True, name="iafoff", aliases=["itemafoff", "iafuckoff", "ianonymousfuckoff", "itemanonymousfoff", "itemanonymousfuckoff"])
-    async def _afoff(self, ctx, *, item: str):
+    async def _aifoff(self, ctx, *, item: str):
         """Displays an anonymous random fuck off message."""
         try:
             await self.bot.delete_message(ctx.message)
