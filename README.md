@@ -1,12 +1,8 @@
 ## Badb
 # Discord Security Bot
-
-.. image:: https://img.shields.io/pypi/v/novus.svg
-   :target: https://pypi.python.org/pypi/novus
-   :alt: PyPI version info
-.. image:: https://img.shields.io/pypi/pyversions/novus.svg
-   :target: https://pypi.python.org/pypi/novus
-   :alt: PyPI supported Python versions
+======================
+![PyPI version info](https://img.shields.io/pypi/v/novus.svg)
+![Python versions](https://img.shields.io/pypi/pyversions/novus.svg)
 
 Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) by [Voxel-Fox-Ltd](https://github.com/Voxel-Fox-Ltd)
       A modern, easy to use, feature-rich, and async ready API wrapper for Discord written in Python.
