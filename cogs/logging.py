@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands, vbu
 
 import os
-from utils import checks
+# from utils import checks
 
-import sqlite3
+# import sqlite3
 
 
 class dbHandler:
@@ -139,8 +139,8 @@ class logging(commands.Cog):
                             content, reaction.emoji, user,
                             reaction.message.channel, reaction.message.timestamp)
 
-    @commands.command(no_pm=True, pass_context=True)
-    @commands.is_owner()
+    @vbu.command(no_pm=True, pass_context=True)
+    @vbu.is_owner()
 # Ideas to fix admin check in above line
     # @commands.has_permissions(administrator=True)
     # @checks.admin()
@@ -155,8 +155,7 @@ class logging(commands.Cog):
 #         os.makedirs(".logs.db")
 
 
-def setup(bot):
+def setup(bot: vbu.Bot):
     # check_folders()
     x = logging(bot)
     bot.add_cog(x)
-
