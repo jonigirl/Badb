@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-# from discord.ext.commands import has_permissions, MissingPermissions
+from discord.ext.commands import has_permissions, MissingPermissions
 # from cogs.utils import checks
 import os
 
@@ -81,7 +81,7 @@ class logging(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler("data/logs.db")
+        self.db = dbHandler(".logs.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -148,12 +148,12 @@ class logging(commands.Cog):
         print("Logs older than 30 days deleted.")
 
 
-def check_folders():
-    if not os.path.exists("/data/logs.db"):
-        print("Creating data/Logging file...")
-        os.makedirs("/data")
+# def check_folders():
+#     if not os.path.exists("/data/logs.db"):
+#         print("Creating data/Logging file...")
+#         os.makedirs("/data")
 
 
 def setup(bot):
-    check_folders()
+    # check_folders()
     bot.add_cog(logging(bot))
