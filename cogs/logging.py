@@ -140,7 +140,7 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @vbu.command(no_pm=True, pass_context=True)
-    @vbu.is_owner()
+    @commands.is_owner()
 # Ideas to fix admin check in above line
     # @commands.has_permissions(administrator=True)
     # @checks.admin()
