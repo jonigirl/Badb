@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from commands import has_permissions, MissingPermissions
+import has_permissions
 # from cogs.utils import checks
 import os
 
