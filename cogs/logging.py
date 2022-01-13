@@ -81,7 +81,7 @@ class logging(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler(".badb.db")
+        self.db = dbHandler("/data/.logs.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -149,8 +149,9 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if os.path.exists(".badb.db"):
+    if os.path.exists("data/.logs.db"):
         print("Database found...")
+        os.makedirs("data/.logs.db")
 
 
 def setup(bot):
