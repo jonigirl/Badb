@@ -39,7 +39,7 @@ class Translator(commands.Cog):
             await ctx.send("That language could not be found in the list, for a list of supported languages do {}translate langlist".format(ctx.prefix))
 
     @translate.command()
-    async def langlist(self):
+    async def langlist(self, ctx):
         """Shows you a list of supported languages."""
         msg = "```fix\nCurrent available languages are:\n"
         for lang in self.gs.get_languages():
