@@ -1,6 +1,7 @@
 # Badb
+## Discord Security Bot
 <details>
-  <summary>## Discord Security Bot(Click to expand)</summary>
+  <summary>(Privacy Policy)</summary>
    [Privacy Policy](./PRIVACY.md)
 </details>
 
