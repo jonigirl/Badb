@@ -139,5 +139,4 @@ async def on_ready():
 
 
 def setup(bot):
-    check_folders()
     bot.add_cog(Music(bot))
