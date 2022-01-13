@@ -6,7 +6,7 @@ from .utils import checks
 import asyncio
 
 
-class Warner(vbu.Cog):
+class warner(vbu.Cog):
     """Warn people."""
 
     def __init__(self, bot):
@@ -120,4 +120,5 @@ def check_files():
 def setup(bot: vbu.Bot):
     check_folders()
     check_files()
-    bot.add_cog(Warner(bot))
+    x = warner(bot)
+    bot.add_cog(x)

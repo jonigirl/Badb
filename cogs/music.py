@@ -53,7 +53,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 
-class Music(vbu.Cog):
+class music(vbu.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -127,4 +127,6 @@ class Music(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    bot.add_cog(Music(bot))
+    x = music(bot)
+    bot.add_cog(x)
+

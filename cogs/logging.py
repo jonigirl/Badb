@@ -156,4 +156,6 @@ class logging(commands.Cog):
 
 def setup(bot):
     # check_folders()
-    bot.add_cog(logging(bot))
+    x = logging(bot)
+    bot.add_cog(x)
+

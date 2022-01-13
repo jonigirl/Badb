@@ -42,4 +42,5 @@ class fuckoff(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    bot.add_cog(fuckoff(bot))
+    x = fuckoff(bot)
+    bot.add_cog(x)

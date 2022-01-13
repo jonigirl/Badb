@@ -18,14 +18,14 @@ except:
             goslateInstalled = False
 
 
-class Translator(vbu.Cog):
+class translator(vbu.Cog):
     """Translate text using google translate."""
 
     def __init__(self, bot):
         self.bot = bot
         self.gs = goslate.Goslate()
 
-    @vbu.group(pass_context=True, invoke_without_command=True)
+    @vbu.group(pass_context=True, invoke_without_command=True, aliases=["tr"])
     async def translate(self, ctx, to_lang, *, text):
         """Translate text using google translate."""
         if to_lang in self.gs.get_languages():
@@ -53,4 +53,5 @@ class Translator(vbu.Cog):
 def setup(bot: vbu.Bot):
     if not goslateInstalled:
         raise RuntimeError("Could not install goslate, cog cannot be loaded.")
-    bot.add_cog(Translator(bot))
+    x = translator(bot)
+    bot.add_cog(x)
