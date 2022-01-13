@@ -149,7 +149,7 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if not os.pathfile.exists("Badb/.logs.db"):
+    if not os.path.exists("Badb/.logs.db"):
         print("Creating data/Logging file...")
         os.makedirs("Badb/.logs.db")
 
