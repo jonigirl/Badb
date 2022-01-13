@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.utils import checks
 # from cogs.utils import checks
 import os
 
