@@ -2,7 +2,7 @@
 ## Discord Security Bot
 <details>
   <summary>Privacy Policy</summary>
-   (./PRIVACY.md)
+  ./PRIVACY.md
 </details>
 
 ### Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) substrate.
