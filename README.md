@@ -1,6 +1,5 @@
 ## Badb
 # Discord Security Bot
-======================
 ![PyPI version info](https://img.shields.io/pypi/v/novus.svg)
 ![Python versions](https://img.shields.io/pypi/pyversions/novus.svg)
 
