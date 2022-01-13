@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord.utils import check
+from .utils import check
 import os
 
 import sqlite3
