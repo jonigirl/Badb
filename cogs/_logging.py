@@ -1,6 +1,6 @@
 import discord
-from discord.ext import commands vbu
-from cogs.utils import checks
+from discord.ext import commands, vbu
+from utils import checks
 import os
 
 import sqlite3
@@ -140,6 +140,10 @@ class logging:
 
     @commands.command(no_pm=True, pass_context=True)
     @checks.admin()
+# Ideas to fix admin check in above line
+# @commands.has_permissions(administrator = True)
+
+
     async def removelogs(self):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
