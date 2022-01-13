@@ -148,7 +148,7 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if os.path.exists("home/joni/Badb/.badb.db"):
+    if os.path.exists(".badb.db"):
         print("Database found...")
 
 
