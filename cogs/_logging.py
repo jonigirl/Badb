@@ -80,7 +80,7 @@ class logging:
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler("sqlite/badb.db")
+        self.db = dbHandler("Badb/badb.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -146,9 +146,9 @@ class logging:
 
 
 def check_folders():
-    if not os.path.exists("./sqlite"):
+    if not os.path.exists("./Badb"):
         print("Creating data/Logging folder...")
-        os.makedirs("./sqlite")
+        os.makedirs("./Badb")
 
 
 def setup(bot):
