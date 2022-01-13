@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, vbu
 
 import os
-from cogs.utils import checks
+from utils import checks
 
 import sqlite3
 
