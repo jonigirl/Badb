@@ -5,7 +5,7 @@ import discord
 import discord.utils
 
 
-class fuckoff:
+class fuckoff(commands.Cog):
     """Fuck off."""
 
     def __init__(self, bot):
