@@ -149,9 +149,9 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if os.path.exists("data/.logs.db"):
-        print("Database found...")
-        os.makedirs("data/.logs.db")
+    if os.path.exists("data"):
+        print("Creating Database...")
+        os.makedirs("data")
 
 
 def setup(bot):
