@@ -80,7 +80,7 @@ class logging(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler("Badb/badb.db")
+        self.db = dbHandler(".badb.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -142,17 +142,15 @@ class logging(commands.Cog):
     # @checks.admin()
 # Ideas to fix admin check in above line
     @commands.has_permissions(administrator=True)
-
-
     async def removelogs(self):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
 
 
 def check_folders():
-    if not os.path.exists("/joni/Badb"):
+    if not os.path.exists("home/joni/Badb/.badb.db"):
         print("Creating data/Logging folder...")
-        os.makedirs("/joni/Badb")
+        os.makedirs("home/joni/Badb")
 
 
 def setup(bot):
