@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import has_permissions, MissingPermissions
-# from cogs.utils import checks
+
 import os
 
 import sqlite3
@@ -81,7 +80,7 @@ class logging(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler(".logs.db")
+        self.db = dbHandler("Baddb/.logs.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -140,20 +139,21 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @commands.command(no_pm=True, pass_context=True)
-    # @checks.admin()
+    @commands.is_owner()
 # Ideas to fix admin check in above line
     # @commands.has_permissions(administrator=True)
+    # @checks.admin()
     async def removelogs(self, ctx):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
 
 
-# def check_folders():
-#     if not os.path.exists("/data/logs.db"):
-#         print("Creating data/Logging file...")
-#         os.makedirs("/data")
+def check_folders():
+    if not os.pathfile.exists("Badb/.logs.db"):
+        print("Creating data/Logging file...")
+        os.makedirs("Badb/.logs.db")
 
 
 def setup(bot):
-    # check_folders()
+    check_folders()
     bot.add_cog(logging(bot))
