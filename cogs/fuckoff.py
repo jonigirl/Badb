@@ -18,10 +18,10 @@ class fuckoff(commands.Cog):
         await ctx.send("{} {}.\n\nBy yours truly {}.".format(randchoice(self.foffmsg), user.mention, ctx.message.author.mention))
 
     @commands.command(pass_context=True, name="afoff", aliases=["anonymousfoff", "afuckoff", "anonymousfuckoff"])
-    async def _afoff(self, ctx, msg, user: discord.Member):
+    async def _afoff(self, ctx, user: discord.Member):
         """Displays an anonymous random fuck off message."""
         try:
-            await self.msg.delete(ctx.message)
+            await self.ctx.delete(ctx.message)
         except discord.Forbidden:
             pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), user.mention))
@@ -32,10 +32,10 @@ class fuckoff(commands.Cog):
         await ctx.send("{} {}.\n\nBy yours truly {}.".format(randchoice(self.foffmsg), item, ctx.message.author.mention))
 
     @commands.command(pass_context=True, name="iafoff", aliases=["itemafoff", "iafuckoff", "ianonymousfuckoff", "itemanonymousfoff", "itemanonymousfuckoff"])
-    async def _aifoff(self, ctx, msg, *, item: str):
+    async def _aifoff(self, ctx, *, item: str):
         """Displays an anonymous random fuck off message for items."""
         try:
-            await self.msg.delete(ctx.message)
+            await self.ctx.delete(ctx.message)
         except discord.Forbidden:
             pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), item))
