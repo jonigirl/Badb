@@ -32,11 +32,11 @@ class Translator(commands.Cog):
             try:
                 lang_id = self.gs.detect(text)
                 lang = self.gs.get_languages()[lang_id]
-                await self.bot.say("{} (detected as {} ({}))".format(self.gs.translate(text, to_lang), lang, lang_id))
+                await ctx.send("{} (detected as {} ({}))".format(self.gs.translate(text, to_lang), lang, lang_id))
             except Exception as e:
-                await self.bot.say("An error occured while translating. ({})".format(e))
+                await ctx.send("An error occured while translating. ({})".format(e))
         else:
-            await self.bot.say("That language could not be found in the list, for a list of supported languages do {}translate langlist".format(ctx.prefix))
+            await ctx.send("That language could not be found in the list, for a list of supported languages do {}translate langlist".format(ctx.prefix))
 
     @translate.command()
     async def langlist(self):
@@ -45,9 +45,9 @@ class Translator(commands.Cog):
         for lang in self.gs.get_languages():
             msg += "\t{}: {}\n".format(self.gs.get_languages()[lang], lang)
             if len(msg) > 1750:
-                await self.bot.say(msg + "```")
+                await ctx.send(msg + "```")
                 msg = "```fix\n"
-        await self.bot.say(msg + "```")
+        await ctx.send(msg + "```")
 
 
 def setup(bot):
