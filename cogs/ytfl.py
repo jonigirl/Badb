@@ -138,4 +138,6 @@ async def on_ready():
     print('------')
 
 
-bot.add_cog(Music(bot))
+def setup(bot):
+    check_folders()
+    bot.add_cog(Music(bot))
