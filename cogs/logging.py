@@ -148,9 +148,8 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if not os.path.exists("home/joni/Badb/.badb.db"):
-        print("Creating data/Logging folder...")
-        os.makedirs("home/joni/Badb")
+    if os.path.exists("home/joni/Badb/.badb.db"):
+        print("Database found...")
 
 
 def setup(bot):
