@@ -21,7 +21,8 @@ class fuckoff(commands.Cog):
     async def _afoff(self, ctx, user: discord.Member):
         """Displays an anonymous random fuck off message."""
         try:
-            await self.ctx.delete(ctx.message)
+            await ctx.message.delete()
+            # await self.bot.delete_message(ctx.message)
         except discord.Forbidden:
             pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), user.mention))
@@ -35,7 +36,8 @@ class fuckoff(commands.Cog):
     async def _aifoff(self, ctx, *, item: str):
         """Displays an anonymous random fuck off message for items."""
         try:
-            await self.ctx.delete(ctx.message)
+            await ctx.message.delete()
+            # await self.bot.delete_message(ctx.message)
         except discord.Forbidden:
             pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), item))
