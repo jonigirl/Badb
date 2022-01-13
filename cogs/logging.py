@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands, vbu
+from discord.ext import commands
 from vbu import checks
 import os
 
