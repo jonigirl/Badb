@@ -142,7 +142,7 @@ class logging(commands.Cog):
     @commands.command(no_pm=True, pass_context=True)
     # @checks.admin()
 # Ideas to fix admin check in above line
-    @commands.has_permissions(administrator=True)
+    # @commands.has_permissions(administrator=True)
     async def removelogs(self, ctx):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
