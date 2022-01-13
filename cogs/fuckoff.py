@@ -33,7 +33,7 @@ class fuckoff(commands.Cog):
 
     @commands.command(pass_context=True, name="iafoff", aliases=["itemafoff", "iafuckoff", "ianonymousfuckoff", "itemanonymousfoff", "itemanonymousfuckoff"])
     async def _aifoff(self, ctx, *, item: str):
-        """Displays an anonymous random fuck off message."""
+        """Displays an anonymous random fuck off message for items."""
         try:
             await self.bot.delete_message(ctx.message)
         except discord.Forbidden:
