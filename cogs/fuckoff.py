@@ -29,7 +29,7 @@ class fuckoff(commands.Cog):
     @commands.command(pass_context=True, name="ifoff", aliases=["itemfoff", "ifuckoff", "itemfuckoff"]) 
     async def _ifoff(self, ctx, *, item):
         """Displays a random fuck off message for items."""
-        await self.bot.say("{} {}.\n\nBy yours truly {}.".format(randchoice(self.foffmsg), item, ctx.message.author.mention))
+        await self.ctx.send("{} {}.\n\nBy yours truly {}.".format(randchoice(self.foffmsg), item, ctx.message.author.mention))
 
     @commands.command(pass_context=True, name="iafoff", aliases=["itemafoff", "iafuckoff", "ianonymousfuckoff", "itemanonymousfoff", "itemanonymousfuckoff"])
     async def _afoff(self, ctx, *, item: str):
