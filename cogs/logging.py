@@ -150,9 +150,9 @@ class logging(commands.Cog):
 
 
 def check_folders():
-    if not os.path.exists("./Badb"):
+    if not os.path.exists("/joni/Badb"):
         print("Creating data/Logging folder...")
-        os.makedirs("./Badb")
+        os.makedirs("/joni/Badb")
 
 
 def setup(bot):
