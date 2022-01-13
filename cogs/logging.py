@@ -139,9 +139,9 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @commands.command(no_pm=True, pass_context=True)
-    @checks.admin()
+    # @checks.admin()
 # Ideas to fix admin check in above line
-# @commands.has_permissions(administrator = True)
+    @commands.has_permissions(administrator=True)
 
 
     async def removelogs(self):
