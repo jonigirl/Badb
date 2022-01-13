@@ -1,21 +1,8 @@
 import discord
 from discord.ext import commands, vbu
 from subprocess import check_output
-try:
-    import goslate
-    goslateInstalled = True
-except:
-    try:
-        from lib import goslate # for my own bot (which is Impulse)
-        goslateInstalled = True
-    except:
-        try:
-            print("Goslate is not installed, installing it now...")
-            check_output("pip3 install goslate", shell=True)
-            import goslate
-            goslateInstalled = True
-        except:
-            goslateInstalled = False
+
+import goslate
 
 
 class translator(vbu.Cog):
@@ -51,7 +38,5 @@ class translator(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    if not goslateInstalled:
-        raise RuntimeError("Could not install goslate, cog cannot be loaded.")
     x = translator(bot)
     bot.add_cog(x)

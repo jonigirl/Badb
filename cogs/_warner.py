@@ -25,37 +25,37 @@ class warner(vbu.Cog):
         if userid not in self.settings[serverid]:
             self.settings[serverid][userid] = 1
             self.save_settings()
-            await self.bot.say("The user has 1 warnings but nothing happens yet, next up: 5 minute mute.")
+            await ctx.send("The user has 1 warnings but nothing happens yet, next up: 5 minute mute.")
             return
         else:
             self.settings[serverid][userid] += times
             self.save_settings()
             if self.settings[serverid][userid] == 1:
-                await self.bot.say("The user has 1 warnings but nothing happens yet, next up: 5 minute mute.")
+                await ctx.send("The user has 1 warnings but nothing happens yet, next up: 5 minute mute.")
             if self.settings[serverid][userid] == 2:
-                await self.bot.say("The user has 2 warnings and has been muted for 5 minutes, next up: 30 minute mute.")
+                await ctx.send("The user has 2 warnings and has been muted for 5 minutes, next up: 30 minute mute.")
                 await self.mute(user, 5)
             elif self.settings[serverid][userid] == 3:
-                await self.bot.say("The user has 3 warnings and has been muted for 30 minutes, next up: kick.")
+                await ctx.send("The user has 3 warnings and has been muted for 30 minutes, next up: kick.")
                 await self.mute(user, 30)
             elif self.settings[serverid][userid] == 4:
                 try:
                     await self.bot.kick(user)
-                    await self.bot.say("The user has 4 warnings and has been kicked, next up: ban.")
+                    await ctx.send("The user has 4 warnings and has been kicked, next up: ban.")
                 except discord.Forbidden:
-                    await self.bot.say("The user has 4 warnings but could not be kicked because I do not have the right perms for that.")
+                    await ctx.send("The user has 4 warnings but could not be kicked because I do not have the right perms for that.")
                 except:
-                    await self.bot.say("The user has 4 warnings but an unknown error occured while trying to kick the user.")
+                    await ctx.send("The user has 4 warnings but an unknown error occured while trying to kick the user.")
             elif self.settings[serverid][userid] >= 5:
                 try:
                     await self.bot.ban(user, delete_message_days=3)
                     del self.settings[serverid][userid]
                     self.save_settings()
-                    await self.bot.say("The user has 5 warnings and has been banned.")
+                    await ctx.send("The user has 5 warnings and has been banned.")
                 except discord.Forbidden:
-                    await self.bot.say("The user has 5 warnings but could not be banned because I do not have the right perms for that.")
+                    await ctx.send("The user has 5 warnings but could not be banned because I do not have the right perms for that.")
                 except:
-                    await self.bot.say("The user has 5 warnings but an unknown error occured while trying to ban the user.")
+                    await ctx.send("The user has 5 warnings but an unknown error occured while trying to ban the user.")
 
     @vbu.command(pass_context=True, no_pm=True)
     @checks.mod_or_permissions()
@@ -64,31 +64,31 @@ class warner(vbu.Cog):
         serverid = ctx.message.server.id
         userid = user.id
         if serverid not in self.settings:
-            await self.bot.say("No one in this server has got a warning yet.")
+            await ctx.send("No one in this server has got a warning yet.")
             return
         elif userid not in self.settings[serverid]:
-            await self.bot.say("This user doesn't have a warning yet.")
+            await ctx.send("This user doesn't have a warning yet.")
             return
         else:
             del self.settings[serverid][userid]
             self.save_settings()
-            await self.bot.say("Users warnings succesfully reset!")
+            await ctx.send("Users warnings succesfully reset!")
             return
 
     @vbu.command(pass_context=True, no_pm=True)
     async def warns(self, ctx, user: discord.Member):
         """See how much warnings someone has."""
         if ctx.message.server.id not in self.settings:
-            await self.bot.say("No one in this server has got a warning yet.")
+            await ctx.send("No one in this server has got a warning yet.")
             return
         elif user.id not in self.settings[ctx.message.server.id]:
-            await self.bot.say("This user doesn't have a warning yet.")
+            await ctx.send("This user doesn't have a warning yet.")
             return
         elif self.settings[ctx.message.server.id][user.id] == 1:
-            await self.bot.say("This user has {} warning.".format(self.settings[ctx.message.server.id][user.id]))
+            await ctx.send("This user has {} warning.".format(self.settings[ctx.message.server.id][user.id]))
             return
         else:
-            await self.bot.say("This user has {} warnings.".format(self.settings[ctx.message.server.id][user.id]))
+            await ctx.send("This user has {} warnings.".format(self.settings[ctx.message.server.id][user.id]))
 
     def save_settings(self):
         dataIO.save_json("warner/warnings.json", self.settings)
