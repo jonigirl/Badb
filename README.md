@@ -1,5 +1,8 @@
 # Badb
-## Discord Security Bot ### [Privacy Policy](./PRIVACY.md)
+<details>
+  <summary>## Discord Security Bot(Click to expand)</summary>
+   [Privacy Policy](./PRIVACY.md)
+</details>
 
 ### Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) substrate.
 ![PyPI version info](https://img.shields.io/pypi/v/novus.svg)
