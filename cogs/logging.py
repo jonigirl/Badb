@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from cogs
+import cogs
 from cogs.utils import checks
 import os
 
