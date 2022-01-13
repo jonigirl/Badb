@@ -1,19 +1,19 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, vbu
 from cogs.utils.dataIO import dataIO
 import os
 from .utils import checks
 import asyncio
 
 
-class Warner(commands.Cog):
+class Warner(vbu.Cog):
     """Warn people."""
 
     def __init__(self, bot):
         self.bot = bot
         self.settings = dataIO.load_json("warner/warnings.json")
 
-    @commands.command(pass_context=True, no_pm=True)
+    @vbu.command(pass_context=True, no_pm=True)
     @checks.mod_or_permissions()
     async def warn(self, ctx, user: discord.Member, times: int = 1):
         """Warn people for their actions."""
@@ -57,7 +57,7 @@ class Warner(commands.Cog):
                 except:
                     await self.bot.say("The user has 5 warnings but an unknown error occured while trying to ban the user.")
 
-    @commands.command(pass_context=True, no_pm=True)
+    @vbu.command(pass_context=True, no_pm=True)
     @checks.mod_or_permissions()
     async def resetwarns(self, ctx, user: discord.Member):
         """Reset the warnings you gave to someone"""
@@ -75,7 +75,7 @@ class Warner(commands.Cog):
             await self.bot.say("Users warnings succesfully reset!")
             return
 
-    @commands.command(pass_context=True, no_pm=True)
+    @vbu.command(pass_context=True, no_pm=True)
     async def warns(self, ctx, user: discord.Member):
         """See how much warnings someone has."""
         if ctx.message.server.id not in self.settings:
@@ -117,7 +117,7 @@ def check_files():
         dataIO.save_json("warner/warnings.json", {})
 
 
-def setup(bot):
+def setup(bot: vbu.Bot):
     check_folders()
     check_files()
     bot.add_cog(Warner(bot))

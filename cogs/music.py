@@ -3,7 +3,7 @@ import asyncio
 import discord
 import youtube_dl
 
-from discord.ext import commands
+from discord.ext import commands, vbu
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -53,12 +53,12 @@ class YTDLSource(discord.PCMVolumeTransformer):
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 
-class Music(commands.Cog):
+class Music(vbu.Cog):
 
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @vbu.command()
     async def join(self, ctx, *, channel: discord.VoiceChannel):
         """Joins a voice channel"""
 
@@ -67,7 +67,7 @@ class Music(commands.Cog):
 
         await channel.connect()
 
-    @commands.command()
+    @vbu.command()
     async def play(self, ctx, *, query):
         """Plays a file from the local filesystem"""
 
@@ -76,7 +76,7 @@ class Music(commands.Cog):
 
         await ctx.send(f'Now playing: {query}')
 
-    @commands.command()
+    @vbu.command()
     async def yt(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""
 
@@ -86,7 +86,7 @@ class Music(commands.Cog):
 
         await ctx.send(f'Now playing: {player.title}')
 
-    @commands.command()
+    @vbu.command()
     async def stream(self, ctx, *, url):
         """Streams from a url (same as yt, but doesn't predownload)"""
 
@@ -96,7 +96,7 @@ class Music(commands.Cog):
 
         await ctx.send(f'Now playing: {player.title}')
 
-    @commands.command()
+    @vbu.command()
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
@@ -106,7 +106,7 @@ class Music(commands.Cog):
         ctx.voice_client.source.volume = volume / 100
         await ctx.send(f"Changed volume to {volume}%")
 
-    @commands.command()
+    @vbu.command()
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
 
@@ -126,5 +126,5 @@ class Music(commands.Cog):
             ctx.voice_client.stop()
 
 
-def setup(bot):
+def setup(bot: vbu.Bot):
     bot.add_cog(Music(bot))

@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, vbu
 from subprocess import check_output
 try:
     import goslate
@@ -18,14 +18,14 @@ except:
             goslateInstalled = False
 
 
-class Translator(commands.Cog):
+class Translator(vbu.Cog):
     """Translate text using google translate."""
 
     def __init__(self, bot):
         self.bot = bot
         self.gs = goslate.Goslate()
 
-    @commands.group(pass_context=True, invoke_without_command=True)
+    @vbu.group(pass_context=True, invoke_without_command=True)
     async def translate(self, ctx, to_lang, *, text):
         """Translate text using google translate."""
         if to_lang in self.gs.get_languages():
@@ -50,7 +50,7 @@ class Translator(commands.Cog):
         await ctx.send(msg + "```")
 
 
-def setup(bot):
+def setup(bot: vbu.Bot):
     if not goslateInstalled:
         raise RuntimeError("Could not install goslate, cog cannot be loaded.")
     bot.add_cog(Translator(bot))
