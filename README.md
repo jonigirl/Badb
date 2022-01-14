@@ -2,9 +2,9 @@
 ## Discord Security Bot
 [Privacy Policy](./PRIVACY.md)
 
-![GitHub issues badge](https://img.shields.io/github/issues-raw/jonigirl/badb)
-![License MIT badge](https://img.shields.io/github/license/jonigirl/badb)
+![License MIT badge](https://img.shields.io/github/license/jonigirl/badb)  
 ![Last commit](https://img.shields.io/github/last-commit/jonigirl/badb)
+![GitHub issues badge](https://img.shields.io/github/issues-raw/jonigirl/badb)
 
 ### Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) substrate.
 ![PyPI version info](https://img.shields.io/pypi/v/novus.svg)
