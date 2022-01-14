@@ -91,7 +91,7 @@ class warner(vbu.Cog):
             await ctx.send("This user has {} warnings.".format(self.settings[ctx.message.server.id][user.id]))
 
     def save_settings(self):
-        dataIO.save_json("warner/warnings.json", self.settings)
+        dataIO.save_json("data/badb.json", self.settings)
 
     async def mute(self, member, minutes: int):
         for channel in member.server.channels:
@@ -106,15 +106,15 @@ class warner(vbu.Cog):
 
 
 def check_folders():
-    if not os.path.exists("warner"):
+    if not os.path.exists("data"):
         print("Creating warner folder...")
-        os.makedirs("warner")
+        os.makedirs("data")
 
 
 def check_files():
-    if not os.path.exists("warner/warnings.json"):
-        print("Creating warner/warnings.json file...")
-        dataIO.save_json("warner/warnings.json", {})
+    if not os.path.exists("data/badb.json"):
+        print("Creating data/warnings.json file...")
+        dataIO.save_json("data/badb.json", {})
 
 
 def setup(bot: vbu.Bot):

@@ -80,7 +80,7 @@ class logging(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.db = dbHandler(".badb.db")
+        self.db = dbHandler("data/badb.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
         self.OPERATION_MESSAGE = 'A'
@@ -152,6 +152,17 @@ class logging(commands.Cog):
 #     if not os.path.exists("./.logs.db"):
 #         print("Creating data/Logging file...")
 #         os.makedirs(".logs.db")
+
+def check_folders():
+    if not os.path.exists("data"):
+        print("Creating data folder...")
+        os.makedirs("data")
+
+
+def check_files():
+    if not os.path.exists("data/badb.db"):
+        print("Creating data/bad.db file...")
+        dataIO.save_json("data/badb.db", {})
 
 
 def setup(bot: vbu.Bot):
