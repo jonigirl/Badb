@@ -148,11 +148,6 @@ class logging(commands.Cog):
         print("Logs older than 30 days deleted.")
 
 
-# def check_folders():
-#     if not os.path.exists("./.logs.db"):
-#         print("Creating data/Logging file...")
-#         os.makedirs(".logs.db")
-
 def check_folders():
     if not os.path.exists("data"):
         print("Creating data folder...")
@@ -163,7 +158,7 @@ def check_files():
     if not os.path.exists("data/badb.db"):
         try:
             with open('badb.db', 'x') as f:
-                f.write('Creating /badb.db file... a new text file!')
+                f.write('Creating new db file...!')
                 f = open("data/badb.db", {})
         except FileNotFoundError:
             print("The Directory of Database does not exist")
