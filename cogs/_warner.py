@@ -1,16 +1,19 @@
 import discord
 from discord.ext import commands, vbu
-from cogs.utils.dataIO import dataIO
+from vbu import utils
 import os
 import asyncio
+import typing
+import collections
 
 
 class warner(vbu.Cog):
     """Warn people."""
 
-    def __init__(self, bot):
-        self.bot = bot
-        self.settings = dataIO.load_json("warner/warnings.json")  # point this to sql
+    def __init__(self, bot: utils.Bot):
+        super().__init__(bot)
+        self.set_profile_locks: typing.Dict[int, asyncio.Lock] = collections.defaultdict(asyncio.Lock)
+        # self.settings = dataIO.load_json("warner/warnings.json")  # point this to sql
 
     def member_is_moderator(bot, member) -> bool:
         """

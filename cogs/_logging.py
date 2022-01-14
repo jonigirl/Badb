@@ -1,8 +1,10 @@
 import discord
 from discord.ext import commands, vbu
-
+from vbu import utils
 import os
-
+import asyncio
+import typing
+import collections
 
 
 class dbHandler:
@@ -29,11 +31,9 @@ class dbHandler:
         self.dbOpen()
         self.createTableIfNotExist()
 
-
 # db = await vbu.Database.get_connection()
 # rows = await db("SELECT 1")
 # await db.disconnect()
-
     def dbOpen(self):
         self.conn = sqlite3.connect(self.dbPath)
 
@@ -87,8 +87,9 @@ class dbHandler:
 class logging(commands.Cog):
     """Message Logging!"""
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: utils.Bot):
+        super().__init__(bot)
+        self.set_profile_locks: typing.Dict[int, asyncio.Lock] = collections.defaultdict(asyncio.Lock)
         self.db = dbHandler("data/badb.db")
         self.OPERATION_REACT_ADD = 'A'
         self.OPERATION_REACT_DELETE = 'D'
@@ -164,7 +165,6 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @vbu.command(no_pm=True, pass_context=True, member_is_moderator=True)
-
     async def removelogs(self, ctx):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
@@ -186,7 +186,7 @@ def check_files():
             print("The Directory of Database does not exist")
 
 
-def setup(bot: vbu.Bot):
+def setup(bot: utils.Bot):
     check_folders()
     check_files()
     x = logging(bot)
