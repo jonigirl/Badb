@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands, vbu
-from .vbu import checks
-
 
 import os
 
@@ -141,8 +139,8 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @vbu.command(no_pm=True, pass_context=True)
-    @vbu.checks
-# Ideas to fix admin check in above line
+    @commands.is_owner()
+    # Ideas to fix admin check in above line
     # @commands.has_permissions(administrator=True)
     # @checks.admin()
     async def removelogs(self, ctx):
