@@ -32,5 +32,5 @@ If it is found out that a user is underage we will take all necessary action to 
 
 ## Questions
 
-If you have any questions or are concerned about what data might be being stored from your account contact `@kaitje`.
+If you have any questions or are concerned about what data might be being stored from your account contact `Kaitje#9241`.
 For more information check the [Discord Terms Of Service](https://discord.com/terms).
