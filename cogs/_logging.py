@@ -3,7 +3,6 @@ from discord.ext import commands, vbu
 
 import os
 
-import sqlite3
 
 
 class dbHandler:
@@ -30,11 +29,21 @@ class dbHandler:
         self.dbOpen()
         self.createTableIfNotExist()
 
+
+# db = await vbu.Database.get_connection()
+# rows = await db("SELECT 1")
+# await db.disconnect()
+
     def dbOpen(self):
         self.conn = sqlite3.connect(self.dbPath)
 
     def dbClose(self):
         self.conn.close()
+
+# This will commit automatically on exit
+
+# async with db.transaction() as transaction:
+#     await transaction("DROP TABLE example")
 
     def createTableIfNotExist(self):
         if self.conn.cursor().execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'").fetchone()[0] == 0:
