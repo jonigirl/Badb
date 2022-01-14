@@ -8,7 +8,7 @@ Use of the Bot is considered an agreement to the terms of this Policy.
 
 Access to Data is only permitted to Bot's developers, and only in the scope required for the development,
 testing, and implementation of features for Bot. Data is not sold, provided to, or shared with any third party,
-except where required by law or a Terms of Service agreement. You can view the data upon request from `@Kaitje`.
+except where required by law or a Terms of Service agreement. You can view the data upon request from ``Kaitje#9241``.
 
 ## Storage of Data
 
