@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands, vbu
-from vbu import checks
+from .vbu import checks
 
 
 import os
