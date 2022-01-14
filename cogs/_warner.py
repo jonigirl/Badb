@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands, vbu
 from cogs.utils.dataIO import dataIO
 import os
-from .utils import checks
 import asyncio
 
 
@@ -11,10 +10,25 @@ class warner(vbu.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.settings = dataIO.load_json("warner/warnings.json")
+        self.settings = dataIO.load_json("warner/warnings.json")  # point this to sql
 
-    @vbu.command(pass_context=True, no_pm=True)
-    @checks.mod_or_permissions()
+    def member_is_moderator(bot, member) -> bool:
+        """
+        Returns whether or not a given discord.Member object is a moderator
+        """
+
+        # Make sure they're an actual member
+        if member.guild is None:
+            return False
+
+        # And return checks
+        return any([
+            member.guild_permissions.manage_roles,
+            member.id in bot.config['owners'],
+            member.guild.owner == member,
+        ])
+
+    @vbu.command(pass_context=True, no_pm=True, member_is_moderator=True)
     async def warn(self, ctx, user: discord.Member, times: int = 1):
         """Warn people for their actions."""
         serverid = ctx.message.server.id
@@ -44,7 +58,7 @@ class warner(vbu.Cog):
                     await ctx.send("The user has 4 warnings and has been kicked, next up: ban.")
                 except discord.Forbidden:
                     await ctx.send("The user has 4 warnings but could not be kicked because I do not have the right perms for that.")
-                except:
+                except commands.CommandError:
                     await ctx.send("The user has 4 warnings but an unknown error occured while trying to kick the user.")
             elif self.settings[serverid][userid] >= 5:
                 try:
@@ -54,11 +68,10 @@ class warner(vbu.Cog):
                     await ctx.send("The user has 5 warnings and has been banned.")
                 except discord.Forbidden:
                     await ctx.send("The user has 5 warnings but could not be banned because I do not have the right perms for that.")
-                except:
+                except commands.CommandError:
                     await ctx.send("The user has 5 warnings but an unknown error occured while trying to ban the user.")
 
-    @vbu.command(pass_context=True, no_pm=True)
-    @checks.mod_or_permissions()
+    @vbu.command(pass_context=True, no_pm=True, member_is_moderator=True)
     async def resetwarns(self, ctx, user: discord.Member):
         """Reset the warnings you gave to someone"""
         serverid = ctx.message.server.id
@@ -75,7 +88,7 @@ class warner(vbu.Cog):
             await ctx.send("Users warnings succesfully reset!")
             return
 
-    @vbu.command(pass_context=True, no_pm=True)
+    @vbu.command(pass_context=True, no_pm=True, member_is_moderator=True)
     async def warns(self, ctx, user: discord.Member):
         """See how much warnings someone has."""
         if ctx.message.server.id not in self.settings:

@@ -95,6 +95,22 @@ class logging(commands.Cog):
         self.OPERATION_MESSAGE = 'A'
         self.OPERATION_EDIT = 'E'
 
+    def member_is_moderator(bot, member) -> bool:
+        """
+        Returns whether or not a given discord.Member object is a moderator
+        """
+
+        # Make sure they're an actual member
+        if member.guild is None:
+            return False
+
+        # And return checks
+        return any([
+            member.guild_permissions.manage_roles,
+            member.id in bot.config['owners'],
+            member.guild.owner == member,
+        ])
+
     async def on_message(self, message):
 
         if message.author.bot:
@@ -147,11 +163,8 @@ class logging(commands.Cog):
                             content, reaction.emoji, user,
                             reaction.message.channel, reaction.message.timestamp)
 
-    @vbu.command(no_pm=True, pass_context=True)
-    @commands.is_owner()
-    # Ideas to fix admin check in above line
-    # @commands.has_permissions(administrator=True)
-    # @checks.admin()
+    @vbu.command(no_pm=True, pass_context=True, member_is_moderator=True)
+
     async def removelogs(self, ctx):
         self.db.deleteOldLogReaction()
         print("Logs older than 30 days deleted.")
