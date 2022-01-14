@@ -113,13 +113,12 @@ def check_folders():
 
 def check_files():
     if not os.path.exists("data/badb.db"):
-        print("Creating data/folder...")
-    try:
-        with open('badb.db', 'x') as f:
-            f.write('Creating /badb.db file... a new text file!')
-        f = open("data/badb.db", {})
-    except FileNotFoundError:
-        print("The Directory of Database does not exist")
+        try:
+            with open('badb.db', 'x') as f:
+                f.write('Creating /badb.db file... a new text file!')
+                f = open("data/badb.db")
+        except FileNotFoundError:
+            print("The Directory of Database does not exist")
 
 
 def setup(bot: vbu.Bot):
