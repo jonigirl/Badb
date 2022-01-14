@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands, vbu
+from vbu import checks
+
 
 import os
-# from utils import checks
 
 # import sqlite3
 
@@ -140,7 +141,7 @@ class logging(commands.Cog):
                             reaction.message.channel, reaction.message.timestamp)
 
     @vbu.command(no_pm=True, pass_context=True)
-    @commands.is_owner()
+    @vbu.checks
 # Ideas to fix admin check in above line
     # @commands.has_permissions(administrator=True)
     # @checks.admin()
