@@ -107,14 +107,19 @@ class warner(vbu.Cog):
 
 def check_folders():
     if not os.path.exists("data"):
-        print("Creating warner folder...")
+        print("Creating data folder...")
         os.makedirs("data")
 
 
 def check_files():
-    if not os.path.exists("data/badb.json"):
-        print("Creating data/warnings.json file...")
-        dataIO.save_json("data/badb.json", {})
+    if not os.path.exists("data/badb.db"):
+        print("Creating data/folder...")
+    try:
+        with open('badb.db', 'x') as f:
+            f.write('Creating /badb.db file... a new text file!')
+        f = open("data/badb.db", {})
+    except FileNotFoundError:
+        print("The Directory of Database does not exist")
 
 
 def setup(bot: vbu.Bot):
