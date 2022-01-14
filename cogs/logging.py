@@ -3,7 +3,7 @@ from discord.ext import commands, vbu
 
 import os
 
-# import sqlite3
+import sqlite3
 
 
 class dbHandler:
