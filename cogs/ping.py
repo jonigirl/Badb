@@ -3,6 +3,9 @@ from discord.ext import commands, vbu
 
 class Ping(vbu.Cog):
 
+    def __init__(self, bot):
+        self.bot = bot
+
     @vbu.command()
     async def ping(self, ctx: vbu.Context):
         """
