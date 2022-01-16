@@ -1,8 +1,7 @@
-from discord.ext import commands, vbu
+import discord
+from discord.ext import vbu
 from random import randint
 from random import choice as randchoice
-import discord
-import discord.utils
 
 
 class Fuckoff(vbu.Cog):
