@@ -21,8 +21,8 @@ class Fuckoff(vbu.Cog):
         """Displays an anonymous random fuck off message."""
         try:
             await ctx.message.delete()
-        except discord.Forbidden:
-            pass
+        except Exception as e:  # discord.Forbidden:
+            print(f"Oops... The error was: {e}")  # pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), user.mention))
 
     @vbu.command(pass_context=True, name="ifoff", aliases=["itemfoff", "ifuckoff", "itemfuckoff"])
@@ -35,8 +35,8 @@ class Fuckoff(vbu.Cog):
         """Displays an anonymous random fuck off message for items."""
         try:
             await ctx.message.delete()
-        except discord.Forbidden:
-            pass
+        except Exception as e:  # discord.Forbidden:  # discord.Forbidden:
+            print(f"Oops... The error was: {e}")  # pass
         await ctx.send("{} {}. ".format(randchoice(self.foffmsg), item))
 
 
