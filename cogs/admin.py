@@ -139,8 +139,7 @@ class Admin(vbu.Cog):
         await ctx.send(embed=embed)
 
     @vbu.command(name='unmute', hidden=True)
-    @vbu.has_permissions(manage_roles=True)
-    @checks.is_registered()
+    @commands.has_permissions(manage_roles=True)
     async def unmute_member(self, ctx, member: discord.Member):
         """Unmutes a member by removing their `Muted` role.
 
