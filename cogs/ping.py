@@ -1,5 +1,4 @@
-from discord
-from discord.ext import vbu
+from discord.ext import commands, vbu
 
 
 class Ping(vbu.Cog):
