@@ -24,7 +24,7 @@ class Admin(vbu.Cog):
         await ctx.channel.purge(limit=limit)
 
     @vbu.command(name='say', hidden=True)
-    @vbu.is_owner()
+    @commands.is_owner()
     async def repeat_message(self, ctx, *, msg: str):
         """Repeats the message as the bot. The invoking message is deleted.
 
@@ -39,7 +39,6 @@ class Admin(vbu.Cog):
 
     @vbu.command(name='spam', hidden=True)
     @vbu.has_permissions(manage_messages=True)
-    @checks.is_registered()
     async def delete_spam_messages(self, ctx):
         """Deletes duplicate messages in the channel.
 
@@ -69,8 +68,7 @@ class Admin(vbu.Cog):
 
 
     @vbu.command(name='add-command', hidden=True)
-    @vbu.is_owner()
-    @checks.is_registered()
+    @commands.is_owner()
     async def add_discord_command(self, ctx, command, *, response):
         """Inserts a quick chatroom command.
 
@@ -90,8 +88,7 @@ class Admin(vbu.Cog):
         await ctx.send(embed=embed)
 
     @vbu.command(name='update-command', hidden=True)
-    @vbu.is_owner()
-    @checks.is_registered()
+    @commands.is_owner()
     async def update_discord_command(self, ctx, command, *, response):
         """Updates a quick chatroom command.
 
@@ -114,8 +111,7 @@ class Admin(vbu.Cog):
         await ctx.send(embed=embed)
 
     @vbu.command(name='mute', hidden=True)
-    @vbu.has_permissions(manage_roles=True)
-    @checks.is_registered()
+    @commands.has_permissions(manage_roles=True)
     async def mute_member(self, ctx, member: discord.Member):
         """Mutes a member by assigning them the `Muted` role.
 
