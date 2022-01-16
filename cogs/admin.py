@@ -1,7 +1,7 @@
 """This cog provides administrative commands to Discord users with elevated privileges."""
 import discord
 from discord.ext import commands, vbu
-from utils import quickembed
+from discord.utils import quickembed
 
 
 class Admin(vbu.Cog):
