@@ -7,7 +7,7 @@ import typing
 import collections
 
 
-class warner(vbu.Cog):
+class Warner(vbu.Cog):
     """Warn people."""
 
     def __init__(self, bot: utils.Bot):
@@ -140,5 +140,5 @@ def check_files():
 def setup(bot: vbu.Bot):
     check_folders()
     check_files()
-    x = warner(bot)
+    x = Warner(bot)
     bot.add_cog(x)

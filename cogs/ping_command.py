@@ -1,7 +1,7 @@
 from discord.ext import commands, vbu
 
 
-class ping(vbu.Cog):
+class Ping(vbu.Cog):
 
     @vbu.command()
     async def ping(self, ctx: vbu.Context):
@@ -16,5 +16,4 @@ class ping(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    x = ping(bot)
-    bot.add_cog(x)
+    x = Ping(bot)

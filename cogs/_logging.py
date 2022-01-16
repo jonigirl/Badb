@@ -84,7 +84,7 @@ class dbHandler:
         return True
 
 
-class logging(commands.Cog):
+class Logging(commands.Cog):
     """Message Logging!"""
 
     def __init__(self, bot: utils.Bot):
@@ -189,5 +189,5 @@ def check_files():
 def setup(bot: utils.Bot):
     check_folders()
     check_files()
-    x = logging(bot)
+    x = Logging(bot)
     bot.add_cog(x)

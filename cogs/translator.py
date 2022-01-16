@@ -5,7 +5,7 @@ from subprocess import check_output
 import goslate
 
 
-class translator(vbu.Cog):
+class Translator(vbu.Cog):
     """Translate text using google translate."""
 
     def __init__(self, bot):
@@ -38,5 +38,5 @@ class translator(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    x = translator(bot)
+    x = Translator(bot)
     bot.add_cog(x)

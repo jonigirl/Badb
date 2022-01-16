@@ -5,7 +5,7 @@ import discord
 import discord.utils
 
 
-class fuckoff(vbu.Cog):
+class Fuckoff(vbu.Cog):
     """Fuck off."""
 
     def __init__(self, bot):
@@ -42,5 +42,5 @@ class fuckoff(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    x = fuckoff(bot)
+    x = Fuckoff(bot)
     bot.add_cog(x)
