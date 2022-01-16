@@ -10,7 +10,7 @@ class Admin(vbu.Cog):
         self.bot = bot
 
     @vbu.command(name='clear', hidden=True)
-    @vbu.has_permissions(administrator=True)
+    @commands.has_permissions(administrator=True)
     async def delete_messages(self, ctx, limit: int = 1):
         """Deletes the latest messages in the channel. The invoking message is deleted.
 
@@ -38,7 +38,7 @@ class Admin(vbu.Cog):
         await ctx.send(msg)
 
     @vbu.command(name='spam', hidden=True)
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def delete_spam_messages(self, ctx):
         """Deletes duplicate messages in the channel.
 
@@ -65,7 +65,6 @@ class Admin(vbu.Cog):
                 DiscordUser(ctx.author),
             )
             self.bot.log(embed=embed)
-
 
     @vbu.command(name='add-command', hidden=True)
     @commands.is_owner()
