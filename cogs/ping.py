@@ -3,7 +3,7 @@ from discord.ext import commands, vbu
 
 class Ping(vbu.Cog):
 
-    def __init__(self, bot: vbu.Bot):
+    def __init__(self, bot):
         self.bot = bot
 
     @vbu.command()
@@ -19,5 +19,5 @@ class Ping(vbu.Cog):
 
 
 def setup(bot: vbu.Bot):
-    x = Ping_(bot)
+    x = Ping(bot)
     bot.add_cog(x)
