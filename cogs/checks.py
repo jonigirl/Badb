@@ -87,4 +87,3 @@ class Checks(vbu.Cog):
 def setup(bot: vbu.Bot):
     x = Checks(bot)
     bot.add_cog(x)
-
