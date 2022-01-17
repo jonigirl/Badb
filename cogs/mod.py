@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands, vbu
-import discord.utils.check
+from discord import utils, checks
 # from utils import check
 
 
