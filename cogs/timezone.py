@@ -106,7 +106,7 @@ class TimezoneInfo(vbu.Cog):
             ],
         ),
     )
-    @vbu.defer()
+    @commands.defer()
     async def timezone_get(self, ctx: vbu.Context, target: typing.Union[discord.Member, str] = None):
         """
         Get the current time for a given user.
