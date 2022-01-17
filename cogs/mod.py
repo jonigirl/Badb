@@ -4,10 +4,6 @@ from discord.ext import commands, vbu
 import discord.utils
 from cogs.utils import checks
 from cogs.dataIO import fileIO
-from __main__ import settings
-
-# from utils import checks
-
 
 from __main__ import send_cmd_help, settings
 
