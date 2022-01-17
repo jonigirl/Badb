@@ -1,10 +1,11 @@
 import discord
 from discord.ext import vbu
-from .utils.dataIO import fileIO
-import discord.utils.checks
+from discord.utils.dataIO import fileIO
+from discord.utils import checks
 from __main__ import send_cmd_help, settings
 import os
 import logging
+
 
 class Mod(vbu.Cog):
     """Moderation tools."""
