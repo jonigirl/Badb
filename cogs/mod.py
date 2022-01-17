@@ -1,9 +1,9 @@
 import discord
 from dataIO import fileIO
 from discord.ext import vbu
-import discord.utils
+# import discord.utils
 from cogs.utils import checks
-from cogs.utils.dataIO import fileIO
+# from cogs.utils.dataIO import fileIO
 
 # import discord
 # from discord.ext import commands
