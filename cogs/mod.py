@@ -1,7 +1,10 @@
 import discord
-from discord import utils
 from dataIO import fileIO
 from discord.ext import commands, vbu
+import discord.utils
+from cogs.utils import checks
+from cogs.utils.dataIO import fileIO
+from __main__ import settings
 
 # from utils import checks
 
