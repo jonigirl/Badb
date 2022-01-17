@@ -9,7 +9,7 @@ import pytz
 
 class TimezoneInfo(vbu.Cog):
 
-    @commands.group(
+    @vbu.group(
         aliases=['tz'],
         application_command_meta=commands.ApplicationCommandMeta(),
     )
@@ -87,7 +87,7 @@ class TimezoneInfo(vbu.Cog):
             )
         await ctx.send(f"I think your current time is **{discord.utils.utcnow().astimezone(zone).strftime('%-I:%M %p')}** - I've stored this in the database.")
 
-    @commands.context_command(name="Get user's timezone")
+    @vbu.context_command(name="Get user's timezone")
     async def _context_command_timezone_get(self, ctx: vbu.SlashContext, user: discord.Member):
         command = self.timezone_get
         await command.can_run(ctx)
@@ -106,7 +106,7 @@ class TimezoneInfo(vbu.Cog):
             ],
         ),
     )
-    @commands.defer()
+    @vbu.defer()
     async def timezone_get(self, ctx: vbu.Context, target: typing.Union[discord.Member, str] = None):
         """
         Get the current time for a given user.
