@@ -17,6 +17,7 @@ goslate==1.5.2
 hiredis==2.0.0
 htmlmin==0.1.12
 idna==3.3
+imgkit==1.2.2
 importlib-metadata==4.10.0
 # installed with pip VBU --Jinja2==3.0.3
 Markdown==3.3.6
