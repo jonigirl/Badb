@@ -1,7 +1,8 @@
 import discord
 import discord.utils
+from .utils import check
 from discord.ext import commands, vbu
-from utils import check
+
 # from utils import checks
 # from utils.dataIO import fileIO
 
