@@ -3,7 +3,7 @@
 # from discord.utils import checks
 import discord
 from discord.ext import vbu
-from discord.ext.commands import utils
+from discord.ext.vbu import utils
 
 
 # from discord.utils.cogs import checks
