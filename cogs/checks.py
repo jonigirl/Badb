@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord.utils
-from .utils.settings import Settings
-from .utils.dataIO import fileIO
+from cogs.utils.settings import Settings
+from cogs.utils.dataIO import fileIO
 from __main__ import settings
 
 #
