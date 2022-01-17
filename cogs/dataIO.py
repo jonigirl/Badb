@@ -17,7 +17,7 @@ class DataIO(vbu.Cog):
             try:
                 with open(filename, encoding='utf-8', mode="r") as f:
                     return True
-            except as e:
+            except Exception as e:
                 logging.exception()
                 return False
         else:
