@@ -1,9 +1,9 @@
 import discord
 from discord import utils
-from discord.ext import vbu
+from discord.ext import vbu, send_cmd_help, settings
+# from vbu import send_cmd_help, settings
 # from utils.dataIO import fileIO
 # from utils import checks
-from vbu import send_cmd_help, settings
 import os
 import logging
 
