@@ -1,9 +1,12 @@
 import discord
 from discord.ext import commands, vbu
-from discord import utils, checks
+from discord import utils
+print("fjashdfsakdf")
 # from utils import checks
 # from utils.dataIO import fileIO
+
 from __main__ import send_cmd_help, settings
+
 import os
 import logging
 
