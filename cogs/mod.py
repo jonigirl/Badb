@@ -1,7 +1,7 @@
 import discord
 from discord.ext import vbu
 from .utils.dataIO import fileIO
-from discord.utils import checks
+import discord.utils.checks
 from __main__ import send_cmd_help, settings
 import os
 import logging
