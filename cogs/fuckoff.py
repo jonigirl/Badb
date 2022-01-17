@@ -1,5 +1,5 @@
 import discord
-from discord.ext import vbu
+from discord.ext import commands, vbu
 from random import randint
 from random import choice as randchoice
 
