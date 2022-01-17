@@ -1,5 +1,5 @@
 import discord
-from .utils import cog
+from discord.utils import checks
 from discord.ext import commands, vbu
 
 
