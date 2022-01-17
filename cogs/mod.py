@@ -3,7 +3,8 @@ from dataIO import fileIO
 from discord.ext import commands, vbu
 import discord.utils
 from cogs.utils import checks
-from discord.utils.dataIO import fileIO
+from cogs.utils.dataIO import fileIO
+
 
 from __main__ import send_cmd_help, settings
 
