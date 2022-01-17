@@ -42,8 +42,8 @@ class UserInfo(vbu.Cog):
             embed.set_image(url=str(url))
         await ctx.send(embed=embed)
 
-    @vbu.context_command(name="Get user info")
-    async def _get_user_info(self, ctx: vbu.SlashContext, user: discord.Member):
+    @commands.context_command(name="Get user info")
+    async def _get_user_info(self, ctx: commands.SlashContext, user: discord.Member):
         command = self.whois
         await command.can_run(ctx)
         await ctx.invoke(command, user)
@@ -102,8 +102,8 @@ class UserInfo(vbu.Cog):
             ],
         ),
     )
-    @vbu.defer()
-    @vbu.guild_only()
+    @commands.defer()
+    @commands.guild_only()
     async def createlog(self, ctx: vbu.Context, amount: int = 100):
         """
         Create a log of chat.
@@ -161,8 +161,8 @@ class UserInfo(vbu.Cog):
         # Output it into the chat
         await ctx.send(file=discord.File(string, filename=f"Logs-{int(ctx.message.created_at.timestamp())}.html"))
 
-    @vbu.context_command(name="Screenshot message")
-    @vbu.guild_only()
+    @commands.context_command(name="Screenshot message")
+    @commands.guild_only()
     async def _context_command_screenshot_message(self, ctx: vbu.Context, message: discord.Message):
         command = self.screenshotmessage
         await command.can_run(ctx)
@@ -185,8 +185,8 @@ class UserInfo(vbu.Cog):
             ],
         ),
     )
-    @vbu.defer()
-    @vbu.guild_only()
+    @commands.defer()
+    @commands.guild_only()
     async def fakemessage(self, ctx: vbu.Context, user: discord.Member, *, content: typing.Union[str, discord.Message]):
         """
         Create a log of chat.
