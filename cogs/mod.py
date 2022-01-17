@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, vbu, send_cmd_help, settings
 from discord.utils import checks
 from discord.utils.dataIO import fileIO
-from bot import send_cmd_help, settings
+from bot import settings
 import os
 import logging
 
