@@ -5,7 +5,7 @@ import asyncio
 import functools
 
 import discord
-from discord.ext import vbu
+from discord.ext import commands, vbu
 from bs4 import BeautifulSoup
 import imgkit
 
@@ -14,7 +14,7 @@ class UserInfo(vbu.Cog):
 
     @vbu.command(
         aliases=["avatar", "av"],
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="target",
@@ -50,7 +50,7 @@ class UserInfo(vbu.Cog):
 
     @vbu.command(
         aliases=["whoami"],
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="user",
@@ -84,13 +84,13 @@ class UserInfo(vbu.Cog):
         embed.set_thumbnail(user.display_avatar.with_size(1024).url)
 
         # Sick
-        if isinstance(ctx, vbu.SlashContext):
+        if isinstance(ctx, commands.SlashContext):
             return await ctx.interaction.response.send_message(embed=embed)
         else:
             return await ctx.send(embed=embed)
 
     @vbu.command(
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="amount",
@@ -170,7 +170,7 @@ class UserInfo(vbu.Cog):
 
     @vbu.command(
         aliases=["screenshotmessage"],
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="user",
