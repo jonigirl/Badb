@@ -1,7 +1,8 @@
 import discord
-from discord.ext import commands, vbu
-import discord.utils
-from cogs.utils import checks
+from discord.ext import vbu
+import discord.utils.cogs.checks
+import discord.utils.cogs.DataIO
+# from cogs.utils import checks
 # from dataIO import fileIO
 # from cogs.utils.dataIO import fileIO
 
