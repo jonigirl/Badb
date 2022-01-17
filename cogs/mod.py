@@ -1,9 +1,17 @@
+# import discord
+# from dataIO import fileIO
+# from discord.ext import commands, vbu
+# import discord.utils
+# from cogs.utils import checks
+# from cogs.utils.dataIO import fileIO
+
 import discord
-from dataIO import fileIO
-from discord.ext import commands, vbu
-import discord.utils
-from cogs.utils import checks
-from cogs.utils.dataIO import fileIO
+from discord.ext import commands
+from .utils.dataIO import fileIO
+from .utils import checks
+from __main__ import send_cmd_help, settings
+import os
+import logging
 
 
 from __main__ import send_cmd_help, settings
