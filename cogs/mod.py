@@ -1,5 +1,5 @@
 import discord
-from discord.utils import checks
+from discord.utils.checks import checks
 # from utils.dataIO import fileIO
 # from utils import checks
 from discord.ext import vbu
