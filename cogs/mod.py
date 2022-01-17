@@ -1,6 +1,6 @@
 import discord
 from discord import utils
-from utils.dataIO import fileIO
+from dataIO import fileIO
 from discord.ext import commands, vbu
 
 # from utils import checks
