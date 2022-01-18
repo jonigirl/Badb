@@ -174,8 +174,8 @@ class QuoteCommands(vbu.Cog):
 
         # Get the message again so we can refresh the reactions
         try:
-            ask_to_save_message_again = await ask_to_save_message
-            .channel.fetch_message(ask_to_save_message.id)
+            ask_to_save_message_again = await ask_to_save_message.channel\
+                .fetch_message(ask_to_save_message.id)
             reaction_count = sum(
                 [i.count if str(i.emoji) == "\N{THUMBS UP SIGN}" else -i.count
                     if str(i.emoji) == "\N{THUMBS DOWN SIGN}" else 0 for i in
