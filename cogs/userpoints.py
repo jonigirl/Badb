@@ -1,8 +1,8 @@
 import typing
-import checks
 
 import discord
 from discord.ext import commands, vbu
+from checks import *
 
 
 class UserPoints(vbu.Cog):
