@@ -24,12 +24,12 @@ class ReminderCommands(vbu.Cog):
     def cog_unload(self):
         self.reminder_finish_handler.stop()
 
-    @commands.group(
+    @vbu.group(
         aliases=["reminders"],
         invoke_without_command=True,
-        application_command_meta=commands.ApplicationCommandMeta(),
+        application_command_meta=vbu.ApplicationCommandMeta(),
     )
-    @commands.bot_has_permissions(send_messages=True)
+    @vbu.bot_has_permissions(send_messages=True)
     async def reminder(self, ctx: vbu.Context):
         """
         The parent group for the reminder commands.
@@ -41,9 +41,9 @@ class ReminderCommands(vbu.Cog):
 
     @reminder.command(
         name="list",
-        application_command_meta=commands.ApplicationCommandMeta(),
+        application_command_meta=vbu.ApplicationCommandMeta(),
     )
-    @commands.bot_has_permissions(send_messages=True)
+    @vbu.bot_has_permissions(send_messages=True)
     async def reminder_list(self, ctx: vbu.Context):
         """
         Shows you your reminders.
@@ -72,7 +72,7 @@ class ReminderCommands(vbu.Cog):
     @reminder.command(
         name="set",
         aliases=['create'],
-        application_command_meta=commands.ApplicationCommandMeta(
+        application_command_meta=vbu.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="time",
@@ -87,7 +87,7 @@ class ReminderCommands(vbu.Cog):
             ],
         ),
     )
-    @commands.bot_has_permissions(send_messages=True)
+    @vbu.bot_has_permissions(send_messages=True)
     async def reminder_set(self, ctx: vbu.Context, time: vbu.TimeValue, *, message: str):
         """
         Adds a reminder to your account.
@@ -123,7 +123,7 @@ class ReminderCommands(vbu.Cog):
     @reminder.command(
         name="delete",
         aliases=['remove'],
-        application_command_meta=commands.ApplicationCommandMeta(
+        application_command_meta=vbu.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="reminder_id",
@@ -133,7 +133,7 @@ class ReminderCommands(vbu.Cog):
             ],
         ),
     )
-    @commands.bot_has_permissions(send_messages=True)
+    @vbu.bot_has_permissions(send_messages=True)
     async def reminder_delete(self, ctx: vbu.Context, reminder_id: str):
         """
         Deletes a reminder from your account.
