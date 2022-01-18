@@ -2,9 +2,11 @@ from discord.ext import commands, vbu
 
 # The permission system of the bot is based on a "just works" basis
 # You have permissions and the bot has permissions. If you meet the permissions
-# required to execute the command (and the bot does as well) then it goes through
+# required to execute the command
+# (and the bot does as well) then it goes through
 # and you can execute the command.
-# Certain permissions signify if the person is a moderator (Manage Server) or an
+# Certain permissions signify if the person is a moderator
+# (Manage Server) or an
 # admin (Administrator). Having these signify certain bypasses.
 # Of course, the owner will always be able to execute commands.
 
@@ -20,7 +22,8 @@ class Checks(vbu.Cog):
             return True
 
         resolved = ctx.channel.permissions_for(ctx.author)
-        return check(getattr(resolved, name, None) == value for name, value in perms.items())
+        return check(getattr(
+            resolved, name, None) == value for name, value in perms.items())
 
     def has_permissions(*, check=all, **perms):
         async def pred(ctx):
@@ -36,7 +39,10 @@ class Checks(vbu.Cog):
             return False
 
         resolved = ctx.author.guild_permissions
-        return check(getattr(resolved, name, None) == value for name, value in perms.items())
+        return check(
+            getattr(
+                resolved, name, None) == value for name,
+            value in perms.items())
 
     def has_guild_permissions(*, check=all, **perms):
         async def pred(ctx):
