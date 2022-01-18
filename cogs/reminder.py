@@ -29,7 +29,7 @@ class ReminderCommands(vbu.Cog):
         invoke_without_command=True,
         application_command_meta=commands.ApplicationCommandMeta(),
     )
-    @vbu.bot_has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     async def reminder(self, ctx: vbu.Context):
         """
         The parent group for the reminder commands.
@@ -43,7 +43,7 @@ class ReminderCommands(vbu.Cog):
         name="list",
         application_command_meta=commands.ApplicationCommandMeta(),
     )
-    @vbu.bot_has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     async def reminder_list(self, ctx: vbu.Context):
         """
         Shows you your reminders.
@@ -87,7 +87,7 @@ class ReminderCommands(vbu.Cog):
             ],
         ),
     )
-    @vbu.bot_has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     async def reminder_set(self, ctx: vbu.Context, time: vbu.TimeValue, *, message: str):
         """
         Adds a reminder to your account.
@@ -133,7 +133,7 @@ class ReminderCommands(vbu.Cog):
             ],
         ),
     )
-    @vbu.bot_has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     async def reminder_delete(self, ctx: vbu.Context, reminder_id: str):
         """
         Deletes a reminder from your account.
