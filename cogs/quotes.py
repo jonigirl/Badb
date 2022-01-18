@@ -94,8 +94,8 @@ class QuoteCommands(vbu.Cog):
                 return {'success': False, 'message': "Multiple images \
                 can't be quoted."}
             elif message.attachments:
-                if self.IMAGE_URL_REGEX.search(message.attachments[0].url)
-                is None:
+                if self.IMAGE_URL_REGEX.search(
+                        message.attachments[0].url) is None:
                     return {'success': False, 'message': "The attachment in \
                     that image isn't a valid image URL."}
                 message.content = message.attachments[0].url
