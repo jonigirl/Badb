@@ -10,8 +10,8 @@ from checks import Checks
 class UserPoints(vbu.Cog):
 
     @commands.group(invoke_without_command=True)
-    @checks.has_permissions(send_messages=True)
-    @checks.guild_only()
+    @commands.bot.has_permissions(send_messages=True)
+    @commands.guild_only()
     async def points(self, ctx: vbu.Context):
         """
         The parent group for the points commands.
@@ -23,8 +23,8 @@ class UserPoints(vbu.Cog):
         return await ctx.send_help(ctx.command)
 
     @points.command(name="get")
-    @checks.has_permissions(send_messages=True)
-    @checks.guild_only()
+    @commands.bot.has_permissions(send_messages=True)
+    @commands.guild_only()
     async def points_get(self, ctx: vbu.Context, user: discord.Member = None):
         """
         Get the number of points that a user has.
@@ -51,9 +51,9 @@ class UserPoints(vbu.Cog):
         await ctx.send(text, allowed_mentions=discord.AllowedMentions.none())
 
     @points.command(name="add")
-    @checks.has_guild_permissions(manage_roles=True)
-    @checks.has_permissions(send_messages=True)
-    @checks.guild_only()
+    @commands.has_guild_permissions(manage_roles=True)
+    @commands.bot.has_permissions(send_messages=True)
+    @commands.guild_only()
     async def points_add(self, ctx: vbu.Context, user: typing.Optional[discord.Member], points: int = 1):
         """
         Add a point to a user.
@@ -77,9 +77,9 @@ class UserPoints(vbu.Cog):
         self.bot.dispatch("leaderboard_update", ctx.guild)
 
     @points.command(name="remove")
-    @checks.has_guild_permissions(manage_roles=True)
-    @checks.bot_has_permissions(send_messages=True)
-    @checks.guild_only()
+    @commands.has_guild_permissions(manage_roles=True)
+    @commands.bot_has_permissions(send_messages=True)
+    @commands.guild_only()
     async def points_remove(self, ctx: vbu.Context, user: typing.Optional[discord.Member], points: int = 1):
         """
         Remove points from a user.
@@ -103,8 +103,8 @@ class UserPoints(vbu.Cog):
         self.bot.dispatch("leaderboard_update", ctx.guild)
 
     @points.group(name="leaderboard", invoke_without_command=True)
-    @checks.has_permissions(send_messages=True, embed_links=True)
-    @checks.guild_only()
+    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.guild_only()
     async def points_leaderboard(self, ctx: vbu.Context):
         """
         A parent group for the points leaderboard commands.
@@ -115,9 +115,9 @@ class UserPoints(vbu.Cog):
         return await ctx.send_help(ctx.command)
 
     @points_leaderboard.command(name="show")
-    @checks.has_guild_permissions(manage_roles=True)
-    @checks.has_permissions(send_messages=True, embed_links=True)
-    @checks.guild_only()
+    @commands.has_guild_permissions(manage_roles=True)
+    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.guild_only()
     async def points_leaderboard_show(self, ctx: vbu.Context):
         """
         Show the points leaderboard without creating a new one.
@@ -151,9 +151,9 @@ class UserPoints(vbu.Cog):
         await ctx.send(embed=embed)
 
     @points_leaderboard.command(name="create")
-    @checks.has_guild_permissions(manage_roles=True)
-    @checks.has_permissions(send_messages=True, embed_links=True)
-    @checks.guild_only()
+    @commands.has_guild_permissions(manage_roles=True)
+    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.guild_only()
     async def points_leaderboard_create(self, ctx: vbu.Context):
         """
         Create a points leaderboard.
