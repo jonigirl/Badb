@@ -1,4 +1,5 @@
 import typing
+import checks
 
 import discord
 from discord.ext import commands, vbu
@@ -157,8 +158,8 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-        print('ctx.guild')
-        assert ctx.guild
+
+        # assert ctx.guild
 
 
         message = await ctx.send("Setting up leaderboard message...")
