@@ -10,7 +10,7 @@ from PIL import Image
 from .types.bot import Bot
 
 
-class ImageUrl(commands.Converter):
+class ImageUrl(vbu.Converter):
 
     __application_option_type__ = discord.ApplicationCommandOptionType.string
     regex = re.compile(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)")
@@ -22,7 +22,7 @@ class ImageUrl(commands.Converter):
 
         v = self.regex.search(argument)
         if v is None:
-            raise commands.BadArgument()
+            raise vbu.BadArgument()
         return argument
 
 
@@ -30,16 +30,16 @@ class EmojiCommands(vbu.Cog[Bot]):
 
     EMOJI_REGEX = re.compile(r'<(a?):([a-zA-Z0-9\_]{1,32}):([0-9]{15,20})>')
 
-    @commands.context_command(name="Add emoji from message")
-    async def add_emojis_from_message(self, ctx: commands.SlashContext, message: discord.Message):
+    @vbu.context_command(name="Add emoji from message")
+    async def add_emojis_from_message(self, ctx: vbu.SlashContext, message: discord.Message):
         """
         Search the emojis in a message and ask the user which they want to add.
         """
 
         # Run all of our checks
-        await commands.guild_only().predicate(ctx)
-        await commands.bot_has_permissions(manage_emojis=True).predicate(ctx)
-        await commands.has_permissions(manage_emojis=True).predicate(ctx)
+        await vbu.guild_only().predicate(ctx)
+        await vbu.bot_has_permissions(manage_emojis=True).predicate(ctx)
+        await vbu.has_permissions(manage_emojis=True).predicate(ctx)
 
         # Check the message for emojis - stolen from partialemojiconverter
         matches = self.EMOJI_REGEX.finditer(message.content)
@@ -127,7 +127,7 @@ class EmojiCommands(vbu.Cog[Bot]):
 
         return (int(width * size_mod), int(height * size_mod))
 
-    @commands.command(
+    @vbu.command(
         aliases=['stealemoji'],
         application_command_meta=commands.ApplicationCommandMeta(
             options=[
@@ -151,10 +151,10 @@ class EmojiCommands(vbu.Cog[Bot]):
             ],
         ),
     )
-    @commands.defer()
+    @vbu.defer()
     @commands.bot_has_permissions(manage_emojis=True)
     @commands.has_guild_permissions(manage_emojis=True)
-    @commands.guild_only()
+    @vbu.guild_only()
     async def addemoji(
             self,
             ctx: vbu.Context,
