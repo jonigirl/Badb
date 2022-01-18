@@ -28,9 +28,8 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-        assert isinstance(ctx.author, discord.Member)
-        assert ctx.guild  # is not None
-        # fetch_data is called on processing commands if guild is not None
+        # assert isinstance(ctx.author, discord.Member)
+        # assert ctx.guild
 
         # Get data
         user = user or ctx.author
