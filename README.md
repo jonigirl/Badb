@@ -6,7 +6,7 @@
 ![Last commit](https://img.shields.io/github/last-commit/jonigirl/badb)
 ![GitHub issues badge](https://img.shields.io/github/issues-raw/jonigirl/badb)
 
-### Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) substrate.
+### Built using [Novus](https://github.com/Voxel-Fox-Ltd/Novus) framework.
 ![PyPI version info](https://img.shields.io/pypi/v/novus.svg)
 ![Python versions](https://img.shields.io/pypi/pyversions/novus.svg)
 
@@ -19,7 +19,7 @@
       - Proper rate limit handling.
       - Optimised in both speed and memory.
       
-### Utilising [VoxelBotsUtils](https://github.com/Voxel-Fox-Ltd/VoxelBotUtils) plugin.
+### Utilising [VoxelBotsUtils](https://github.com/Voxel-Fox-Ltd/VoxelBotUtils) module.
 ![GitHub stars badge](https://img.shields.io/github/stars/Voxel-Fox-Ltd/VoxelBotUtils)
 ![PyPi version info](https://img.shields.io/pypi/v/voxelbotutils.svg)
 ![PyPi Python versions](https://img.shields.io/pypi/pyversions/voxelbotutils.svg)
