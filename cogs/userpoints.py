@@ -57,8 +57,8 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-        assert isinstance(ctx.author, discord.Member)
-        assert ctx.guild
+        # assert isinstance(ctx.author, discord.Member)
+        # assert ctx.guild
 
         # Alter data
         user = user or ctx.author
@@ -83,8 +83,8 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-        assert isinstance(ctx.author, discord.Member)
-        assert ctx.guild
+        # assert isinstance(ctx.author, discord.Member)
+        # assert ctx.guild
 
         # Alter data
         user = user or ctx.author
@@ -121,8 +121,7 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-        print('ctx.guild')
-        assert ctx.guild
+        # assert ctx.guild
 
         # See if they're running a subcommand
         if ctx.invoked_subcommand is not None:
@@ -157,7 +156,6 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
-
         # assert ctx.guild
 
 
