@@ -7,7 +7,7 @@ from discord.ext import commands, vbu
 class UserPoints(vbu.Cog):
 
     @commands.group(invoke_without_command=True)
-    @commands.bot.has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     @commands.guild_only()
     async def points(self, ctx: vbu.Context):
         """
@@ -20,7 +20,7 @@ class UserPoints(vbu.Cog):
         return await ctx.send_help(ctx.command)
 
     @points.command(name="get")
-    @commands.bot.has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     @commands.guild_only()
     async def points_get(self, ctx: vbu.Context, user: discord.Member = None):
         """
@@ -49,7 +49,7 @@ class UserPoints(vbu.Cog):
 
     @points.command(name="add")
     @commands.has_guild_permissions(manage_roles=True)
-    @commands.bot.has_permissions(send_messages=True)
+    @commands.bot_has_permissions(send_messages=True)
     @commands.guild_only()
     async def points_add(self, ctx: vbu.Context, user: typing.Optional[discord.Member], points: int = 1):
         """
@@ -100,7 +100,7 @@ class UserPoints(vbu.Cog):
         self.bot.dispatch("leaderboard_update", ctx.guild)
 
     @points.group(name="leaderboard", invoke_without_command=True)
-    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.bot_has_permissions(send_messages=True, embed_links=True)
     @commands.guild_only()
     async def points_leaderboard(self, ctx: vbu.Context):
         """
@@ -113,7 +113,7 @@ class UserPoints(vbu.Cog):
 
     @points_leaderboard.command(name="show")
     @commands.has_guild_permissions(manage_roles=True)
-    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.bot_has_permissions(send_messages=True, embed_links=True)
     @commands.guild_only()
     async def points_leaderboard_show(self, ctx: vbu.Context):
         """
@@ -149,7 +149,7 @@ class UserPoints(vbu.Cog):
 
     @points_leaderboard.command(name="create")
     @commands.has_guild_permissions(manage_roles=True)
-    @commands.bot.has_permissions(send_messages=True, embed_links=True)
+    @commands.bot_has_permissions(send_messages=True, embed_links=True)
     @commands.guild_only()
     async def points_leaderboard_create(self, ctx: vbu.Context):
         """
