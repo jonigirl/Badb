@@ -27,7 +27,7 @@ class ReminderCommands(vbu.Cog):
     @vbu.group(
         aliases=["reminders"],
         invoke_without_command=True,
-        application_command_meta=vbu.ApplicationCommandMeta(),
+        application_command_meta=commands.ApplicationCommandMeta(),
     )
     @vbu.bot_has_permissions(send_messages=True)
     async def reminder(self, ctx: vbu.Context):
@@ -41,7 +41,7 @@ class ReminderCommands(vbu.Cog):
 
     @reminder.command(
         name="list",
-        application_command_meta=vbu.ApplicationCommandMeta(),
+        application_command_meta=commands.ApplicationCommandMeta(),
     )
     @vbu.bot_has_permissions(send_messages=True)
     async def reminder_list(self, ctx: vbu.Context):
@@ -72,7 +72,7 @@ class ReminderCommands(vbu.Cog):
     @reminder.command(
         name="set",
         aliases=['create'],
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="time",
@@ -123,7 +123,7 @@ class ReminderCommands(vbu.Cog):
     @reminder.command(
         name="delete",
         aliases=['remove'],
-        application_command_meta=vbu.ApplicationCommandMeta(
+        application_command_meta=commands.ApplicationCommandMeta(
             options=[
                 discord.ApplicationCommandOption(
                     name="reminder_id",
