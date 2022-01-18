@@ -3,7 +3,7 @@ import os
 import sys
 import discord
 from discord.ext import commands, vbu
-from checks import *
+from checks.py import *
 
 
 class UserPoints(vbu.Cog):
