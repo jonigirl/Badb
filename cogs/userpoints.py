@@ -29,7 +29,8 @@ class UserPoints(vbu.Cog):
 
         # Make some assertions
         assert isinstance(ctx.author, discord.Member)
-        assert ctx.guild
+        assert ctx.guild  # is not None
+        # fetch_data is called on processing commands if guild is not None
 
         # Get data
         user = user or ctx.author
@@ -156,7 +157,9 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
+        print('ctx.guild')
         assert ctx.guild
+
 
         message = await ctx.send("Setting up leaderboard message...")
         async with vbu.Database() as db:
