@@ -2,7 +2,7 @@ import typing
 import sys
 import discord
 from discord.ext import commands, vbu
-from cogs.checks import *
+from cogs import checks
 
 
 class UserPoints(vbu.Cog):
