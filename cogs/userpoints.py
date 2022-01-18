@@ -4,7 +4,7 @@ import sys
 import discord
 from discord.ext import commands, vbu
 sys.path.append("cogs")
-from checks import *
+from checks import Checks
 
 
 class UserPoints(vbu.Cog):
