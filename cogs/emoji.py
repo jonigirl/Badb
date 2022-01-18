@@ -98,7 +98,7 @@ class EmojiCommands(vbu.Cog[Bot]):
                     components=None,
                 )
             except Exception as e:
-               logging.exception()
+                logging.exception()
                 pass
             return
 
