@@ -1,5 +1,6 @@
 import json
 import discord
+import logging
 from discord.ext import commands, vbu
 
 # editable parameters
@@ -140,7 +141,7 @@ class TicketCog(vbu.Cog):
                 )
                 ticket_name = ctx.channel.name
                 with open(
-                    f"tickets/{ticket_name}.txt", "w", \
+                    f"tickets/{ticket_name}.txt", "w",
                         encoding="utf8") as f:
                     f.write(f"Here is the message log for ticket ID \
                         {ticket_name}\n----------\n\n")
@@ -180,7 +181,7 @@ class TicketCog(vbu.Cog):
                 if ctx.guild.get_role(role_id.id) in ctx.author.roles:
                     valid_user = True
             except Exception as e:
-                logging.exception()
+                logging.exception(e)
                 pass
 
         if valid_user or ctx.author.guild_permissions.administrator:
@@ -193,35 +194,40 @@ class TicketCog(vbu.Cog):
                     if str(
                             mentionRole) == "true":
                         data["roles-to-mention"].append(str(role_id.id))
-                    with open('data.json', 'w') as f:json.dump(data, f) em = discord.Embed(title="Add support", description="You \
-                        have successfully added `{}` to the support team.".format(role_id.name), color=0x00a8ff)
+                    with open('data.json', 'w') as f:
+                        json.dump(data, f)
+                    em = discord.Embed(
+                        title="Add support", description="You have \
+                        successfully added `{}` to the support team\
+                        .".format(role_id.name), color=0x00a8ff)
                     await ctx.send(embed=em)
 
                 except Exception as e:
-                    logging.exception()
-                    em = discord.Embed(title="Add support", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                    logging.exception(e)
+                    em = discord.Embed(
+                        title="Add support", description="That isn't a \
+                        valid role ID. Please try again with a valid role ID.")
                     await ctx.send(embed=em)
-            
+
             else:
-                em = discord.Embed(title="Add support", description="That role already has access to tickets!", color=0x00a8ff)
+                em = discord.Embed(
+                    title="Add support", description="That role already has \
+                    access to tickets!", color=0x00a8ff)
                 await ctx.send(embed=em)
-        
+
         else:
-            em = discord.Embed(title="Add support", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+            em = discord.Embed(
+                title="Add support", description="Sorry, you don't have \
+                permission to run that command.", color=0x00a8ff)
             await ctx.send(embed=em)
 
-    #####
-    #   delsupport -> Delete support role
-    #      [prefix]delsupport Removes role from support team. (admin-level command).
-    #
-    #   Bot permissions: read / write
-    #   User permissions: admin or support
-    #
-    ######
-    @commands.command(name='delsupport', brief='Delete support role', description='[prefix]delsupport Removes role from support team. (admin-level command).')
-    async def delsupport(self, ctx, role_id : discord.Role):
+    @commands.command(
+        name='delsupport', brief='Delete support role', description='[prefix]\
+        delsupport Removes role from support team. \
+        (admin-level command).')
+    async def delsupport(self, ctx, role_id: discord.Role):
         data = await TicketCog.dataExists(ctx)
-        if  data is None :
+        if data is None:
             return
 
         valid_user = False
@@ -230,7 +236,8 @@ class TicketCog(vbu.Cog):
             try:
                 if ctx.guild.get_role(role) in ctx.author.roles:
                     valid_user = True
-            except:
+            except Exception as e:
+                logging.exception(e)
                 pass
 
         if valid_user or ctx.author.guild_permissions.administrator:
@@ -243,44 +250,51 @@ class TicketCog(vbu.Cog):
                     data["ticket-support-roles"] = valid_roles
                     with open('data.json', 'w') as f:
                         json.dump(data, f)
-                    em = discord.Embed(title="Delete Support", description="You have successfully removed `{}` from the support team.".format(role_id.name), color=0x00a8ff)
-                    await ctx.send(embed=em)
-                
-                else:
-                    em = discord.Embed(title="Delete Support", description="That role already doesn't have access to tickets!", color=0x00a8ff)
+                    em = discord.Embed(
+                        title="Delete Support", description="You have \
+                        successfully removed `{}` from the support team."
+                        .format(role_id.name), color=0x00a8ff)
                     await ctx.send(embed=em)
 
-            except:
-                em = discord.Embed(title="Delete Support", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                else:
+                    em = discord.Embed(
+                        title="Delete Support", description="That role \
+                        already doesn't have access to tickets!",
+                        color=0x00a8ff)
+                    await ctx.send(embed=em)
+
+            except Exception as e:
+                logging.exception(e)
+                em = discord.Embed(
+                    title="Delete Support", description="That isn't a val\
+                    id role ID. Please try again with a valid role ID.")
                 await ctx.send(embed=em)
 
         else:
-            em = discord.Embed(title="Delete Support", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+            em = discord.Embed(
+                title="Delete Support", description="Sorry, you don't have \
+                permission to run that command.", color=0x00a8ff)
             await ctx.send(embed=em)
 
-    #####
-    #   addmentionrole -> Add mentionable role
-    #      [prefix]addmentionrole This command adds a role to the list of mentioned roles. (admin-level command).
-    #
-    #   Bot permissions: read / write
-    #   User permissions: admin or support
-    #
-    ######
-    @commands.command(name='addmentionrole', brief='Add mentionable role', description='[prefix]addmentionrole This command adds a role to the list of mentioned roles. (admin-level command).')
-    async def addmentionrole(self, ctx, role_id : discord.Role):
+    @commands.command(
+        name='addmentionrole', brief='Add mentionable role',
+        description='[prefix]addmentionrole This command adds a role to the \
+        list of mentioned roles. (admin-level command).')
+    async def addmentionrole(self, ctx, role_id: discord.Role):
         data = await TicketCog.dataExists(ctx)
-        if  data is None :
+        if data is None:
             return
-        
+
         valid_user = False
 
         for role_id in data["ticket-support-roles"]:
             try:
                 if ctx.guild.get_role(role_id.id) in ctx.author.roles:
                     valid_user = True
-            except:
+            except Exception as e:
+                logging.exception(e)
                 pass
-        
+
         if valid_user or ctx.author.guild_permissions.administrator:
 
             if role_id not in data["roles-to-mention"]:
@@ -292,45 +306,51 @@ class TicketCog(vbu.Cog):
                     with open('data.json', 'w') as f:
                         json.dump(data, f)
 
-                    em = discord.Embed(title="Add mention", description="You have successfully added `{}` to the list of mentioned roles.".format(role_id.name), color=0x00a8ff)
+                    em = discord.Embed(
+                        title="Add mention", description="You have successfull\
+                        y added `{}` to the list of mentioned roles."
+                        .format(role_id.name), color=0x00a8ff)
 
                     await ctx.send(embed=em)
 
-                except:
-                    em = discord.Embed(title="Add mention", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                except Exception as e:
+                    logging.exception(e)
+                    em = discord.Embed(title="Add mention", description="T\
+                        hat isn't a valid role ID. Please try again with a \
+                        valid role ID.")
                     await ctx.send(embed=em)
-                
+
             else:
-                em = discord.Embed(title="Add mention", description="That role already receives pings when tickets are created.", color=0x00a8ff)
+                em = discord.Embed(
+                    title="Add mention", description="That role already \
+                    receives pings when tickets are created.", color=0x00a8ff)
                 await ctx.send(embed=em)
-        
+
         else:
-            em = discord.Embed(title="Add mention", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+            em = discord.Embed(
+                title="Add mention", description="Sorry, you don't have \
+                permission to run that command.", color=0x00a8ff)
             await ctx.send(embed=em)
 
-    #####
-    #   delmentionrole -> Delete mentionable role
-    #      [prefix]delmentionrole This command removes a role from the list of mentioned roles. (admin-level command).
-    #
-    #   Bot permissions: read / write
-    #   User permissions: admin or support
-    #
-    ######
-    @commands.command(name='delmentionrole', brief='Delete mentionable role', description='[prefix]delmentionrole This command removes a role from the list of mentioned roles. (admin-level command).')
-    async def delmentionrole(self, ctx, role_id : discord.Role):
+    @commands.command(
+        name='delmentionrole', brief='Delete mentionable role',
+        description='[prefix]delmentionrole This command removes a role from \
+        the list of mentioned roles. (admin-level command).')
+    async def delmentionrole(self, ctx, role_id: discord.Role):
         data = await TicketCog.dataExists(ctx)
-        if  data is None :
+        if data is None:
             return
-        
+
         valid_user = False
 
         for role in data["ticket-support-roles"]:
             try:
                 if ctx.guild.get_role(role) in ctx.author.roles:
                     valid_user = True
-            except:
+            except Exception as e:
+                logging.exception(e)
                 pass
-        
+
         if valid_user or ctx.author.guild_permissions.administrator:
 
             try:
@@ -347,19 +367,30 @@ class TicketCog(vbu.Cog):
                     with open('data.json', 'w') as f:
                         json.dump(data, f)
 
-                    em = discord.Embed(title="Delete mention", description="You have successfully removed `{}` from the list of mentioned roles.".format(role.name), color=0x00a8ff)
-                    await ctx.send(embed=em)
-                
-                else:
-                    em = discord.Embed(title="Delete mention", description="That role already isn't getting pinged when new tickets are created!", color=0x00a8ff)
+                    em = discord.Embed(
+                        title="Delete mention", description="You have success\
+                        fully removed `{}` from the list of mentioned roles.\
+                        ".format(role.name), color=0x00a8ff)
                     await ctx.send(embed=em)
 
-            except:
-                em = discord.Embed(title="Delete mention", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                else:
+                    em = discord.Embed(
+                        title="Delete mention", description="That role already \
+                        isn't getting pinged when new tickets are created!\
+                        ", color=0x00a8ff)
+                    await ctx.send(embed=em)
+
+            except Exception as e:
+                logging.exception(e)
+                em = discord.Embed(
+                    title="Delete mention", description="That isn't a valid \
+                    role ID. Please try again with a valid role ID.")
                 await ctx.send(embed=em)
-        
+
         else:
-            em = discord.Embed(title="Delete mention", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+            em = discord.Embed(
+                title="Delete mention", description="Sorry, you don't have \
+                permission to run that command.", color=0x00a8ff)
             await ctx.send(embed=em)
 
     @commands.Cog.listener()
@@ -368,23 +399,43 @@ class TicketCog(vbu.Cog):
             data = json.load(f)
         message_id = payload.message_id
         if message_id == int(data["ticket-react-message-id"]):
-            if not data["bot-role"] in [y.name.lower() for y in payload.member.roles]:
+            if not data["bot-role"] in [y.name.lower() for y in
+                    payload.member.roles]:
                 if payload.emoji.name == data["ticket-emoji"]:
-                    mes= await payload.member.guild.get_channel(payload.channel_id).fetch_message(payload.message_id)
+                    mes = await payload.member.guild.get_channel(
+                        payload.channel_id).fetch_message(payload.message_id)
                     await mes.remove_reaction(payload.emoji, payload.member)
                     ticket_number = int(data["ticket-counter"])
                     ticket_number += 1
-                    
-                    ticket_channel = await payload.member.guild.create_text_channel("ticket-{}".format(ticket_number), category=payload.member.guild.get_channel(payload.channel_id).category)
-                    await ticket_channel.set_permissions(payload.member.guild.get_role(payload.member.guild.id), send_messages=False, read_messages=False)
-                    await ticket_channel.set_permissions(payload.member, send_messages=True, read_messages=True, add_reactions=True, embed_links=True, attach_files=True, read_message_history=True, external_emojis=True)
+                    ticket_channel = await payload.member.guild.\
+                        create_text_channel(
+                            "ticket-{}".format(ticket_number),
+                            category=payload.member.guild.get_channel(
+                                payload.channel_id).category)
+                    await ticket_channel.set_permissions(
+                        payload.member.guild.get_role(payload.member.guild.id),
+                        send_messages=False, read_messages=False)
+                    await ticket_channel.set_permissions(
+                        payload.member, send_messages=True, read_messages=True,
+                        add_reactions=True, embed_links=True,
+                        attach_files=True, read_message_history=True,
+                        external_emojis=True)
 
                     for role_id in data["ticket-support-roles"]:
-                            role = payload.member.guild.get_role(int(role_id))
-                            await ticket_channel.set_permissions(role, send_messages=True, read_messages=True, add_reactions=True, embed_links=True, attach_files=True, read_message_history=True, external_emojis=True)
+                        role = payload.member.guild.get_role(int(role_id))
+                        await ticket_channel.set_permissions(
+                            role, send_messages=True, read_messages=True,
+                            add_reactions=True, embed_links=True,
+                            attach_files=True, read_message_history=True,
+                            external_emojis=True)
 
-                    em = discord.Embed(title="New ticket from {}#{}".format(payload.member.name, payload.member.discriminator), color=0x00a8ff)
-                    em.add_field(name="Don't worry", value="You will get help in a short time "+payload.member.mention)
+                    em = discord.Embed(
+                        title="New ticket from {}#{}".format(
+                            payload.member.name, payload.member
+                            .discriminator), color=0x00a8ff)
+                    em.add_field(
+                        name="Don't worry", value="You will get help in a \
+                        short time "+payload.member.mention)
 
                     pinged_msg_content = ""
 
@@ -395,7 +446,8 @@ class TicketCog(vbu.Cog):
                             pinged_msg_content += role.mention
                             pinged_msg_content += " "
                     if pinged_msg_content != "":
-                        em.add_field(name = "Support team", value = pinged_msg_content)
+                        em.add_field(
+                            name="Support team", value=pinged_msg_content)
 
                     await ticket_channel.send(embed=em)
                     data["ticket-channel-ids"].append(ticket_channel.id)
