@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands, vbu
 from PIL import Image
 
-from .types.bot import Bot
+from discord.types.bot import Bot
 
 
 class ImageUrl(vbu.Converter):
