@@ -63,7 +63,7 @@ class ReminderCommands(vbu.Cog):
         reminders = ""
         for reminder in rows:
             expiry = discord.utils.format_dt(reminder['timestamp'])
-            reminders += f"\n`{reminder['reminder_id']}` - {reminder['message'][:70]} ({expiry})"
+            reminders += f"\n`{reminder['reminder_id']}` - {reminder['message'][:70]} .join{expiry}"
         message = f"Your reminders: {reminders}"
 
         # Send to the user
