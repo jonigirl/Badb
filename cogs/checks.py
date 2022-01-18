@@ -79,10 +79,6 @@ class Checks(vbu.Cog):
             return guild.id in guild_ids
         return commands.check(predicate)
 
-    # @staticmethod
-    # def is_lounge_cpp():
-    #     return is_in_guilds(145079846832308224)
-
 
 def setup(bot: vbu.Bot):
     x = Checks(bot)
