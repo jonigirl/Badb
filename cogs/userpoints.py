@@ -120,6 +120,7 @@ class UserPoints(vbu.Cog):
         """
 
         # Make some assertions
+        print('ctx.guild')
         assert ctx.guild
 
         # See if they're running a subcommand
