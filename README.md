@@ -1,4 +1,4 @@
-# Badb
+# Badb # v0.4.0a
 ## Discord Security Bot
 [Privacy Policy](./PRIVACY.md)
 
