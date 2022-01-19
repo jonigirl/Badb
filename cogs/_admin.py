@@ -12,7 +12,6 @@ class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.command(name='clear', hidden=True)
     @commands.has_permissions(administrator=True)
     async def delete_messages(self, ctx, limit: int = 1):
@@ -71,7 +70,6 @@ class Admin(commands.Cog):
             )
             self.bot.log(embed=embed)
 
-
     @commands.command(name='mute', hidden=True)
     @commands.has_permissions(manage_roles=True)
     @checks.is_registered()
@@ -91,10 +89,12 @@ class Admin(commands.Cog):
         user = DiscordUser(ctx.author)
         role = discord.utils.find(lambda r: r.name == 'Muted', ctx.guild.roles)
         if not role:
-            embed = quickembed.error(desc='`Muted` role does not exist', user=user)
+            embed = quickembed.error(
+                desc='`Muted` role does not exist', user=user)
         elif role not in member.roles:
             await member.add_roles(role)
-            embed = quickembed.success(desc='Muted {}'.format(member), user=user)
+            embed = quickembed.success(
+                desc='Muted {}'.format(member), user=user)
         else:
             embed = quickembed.error(
                 desc='{} is already muted'.format(member), user=user
@@ -120,16 +120,17 @@ class Admin(commands.Cog):
         user = DiscordUser(ctx.author)
         role = discord.utils.find(lambda r: r.name == 'Muted', ctx.guild.roles)
         if not role:
-            embed = quickembed.error(desc='`Muted` role does not exist', user=user)
+            embed = quickembed.error(
+                desc='`Muted` role does not exist', user=user)
         elif role in member.roles:
             await member.remove_roles(role)
-            embed = quickembed.success(desc='Unmuted {}'.format(member), user=user)
+            embed = quickembed.success(
+                desc='Unmuted {}'.format(member), user=user)
         else:
             embed = quickembed.error(
                 desc='{} is already unmuted'.format(member), user=user
             )
         await ctx.send(embed=embed)
-
 
 
 def setup(bot):

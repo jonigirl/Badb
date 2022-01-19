@@ -400,7 +400,7 @@ class TicketCog(vbu.Cog):
         message_id = payload.message_id
         if message_id == int(data["ticket-react-message-id"]):
             if not data["bot-role"] in [y.name.lower() for y in
-                    payload.member.roles]:
+                                        payload.member.roles]:
                 if payload.emoji.name == data["ticket-emoji"]:
                     mes = await payload.member.guild.get_channel(
                         payload.channel_id).fetch_message(payload.message_id)

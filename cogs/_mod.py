@@ -43,8 +43,8 @@ class Moderation(commands.Cog):
 
         await ctx.message.delete()
         kick = discord.Embed(description=f"**A member has been kicked.**\n\n"
-                                          f"Moderator: {ctx.author.mention}\n"
-                                          f"Member: {member.mention}", colour=discord.Colour.blue())
+                             f"Moderator: {ctx.author.mention}\n"
+                             f"Member: {member.mention}", colour=discord.Colour.blue())
         kick.add_field(name="Reason", value=reason, inline=False)
         await ctx.send(embed=kick)
 
@@ -132,7 +132,6 @@ class Moderation(commands.Cog):
                                            f"Moderator: {ctx.author.mention}\n"
                                            f"Member: {member.mention}", colour=discord.Colour.blue())
         await ctx.send(embed=unmute)
-
 
     @commands.command(name="nuke",
                       description="Clones a text channel and then deletes the old one")

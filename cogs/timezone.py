@@ -58,30 +58,38 @@ class TimezoneInfo(vbu.Cog):
         # Ask them the question
         if offset is None:
             ask_message = await ctx.send((
-                f"Hey, {ctx.author.mention}, what timezone are you currently in? You can give its name (`EST`, `GMT`, etc) "
-                "or you can give your continent and nearest large city (`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
+                f"Hey, {ctx.author.mention}, what timezone are you currently \
+                in? You can give its name (`EST`, `GMT`, etc) "
+                "or you can give your continent and nearest large city \
+                (`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
                 "case sensitive."
             ))
             try:
-                check = lambda m: m.author.id == ctx.author.id and m.channel.id == ctx.channel.id
-                response_message = await self.bot.wait_for("message", check=check, timeout=30)
+                def check(m): return m.author.id == ctx.author.id \
+                    and m.channel.id == ctx.channel.id
+                response_message = await self.bot.wait_for(
+                    "message", check=check, timeout=30)
                 offset = response_message.content
             except asyncio.TimeoutError:
                 return await ask_message.delete()
 
-        # See if it's one of the more common ones that I know don't actually exist
+        # Check for Common
         offset = self.get_common_timezone(offset)
 
         # Try and parse the timezone name
         try:
             zone = pytz.timezone(offset)
         except pytz.UnknownTimeZoneError:
-            return await ctx.send(f"I can't work out what timezone you're referring to - please run this command again to try later, or go to the website (`{ctx.clean_prefix}info`) and I can work it out automatically.")
+            return await ctx.send(
+                f"I can't work out what timezone you're referring to - \
+                please run this command again to try later, or go to the \
+                website (`{ctx.clean_prefix}info`) and \
+                I can work it out automatically.")
 
         # Store it in the database
         async with vbu.Database() as db:
             await db(
-                """INSERT INTO user_settings (user_id, timezone_name) VALUES ($1, $2) ON CONFLICT (user_id)
+                """INSERT INTO user_settings (user_id, timezone_name) \VALUES ($1, $2) ON CONFLICT (user_id)
                 DO UPDATE SET timezone_name=excluded.timezone_name""",
                 ctx.author.id, zone.zone,
             )
@@ -131,15 +139,18 @@ class TimezoneInfo(vbu.Cog):
         # Grab their current time and output
         if target_is_timezone:
             try:
-                formatted_time = (discord.utils.utcnow().astimezone(pytz.timezone(target))).strftime('%-I:%M %p')
+                formatted_time = (discord.utils.utcnow().astimezone(
+                    pytz.timezone(target))).strftime('%-I:%M %p')
             except pytz.UnknownTimeZoneError:
                 return await ctx.send("That isn't a valid timezone.")
             return await ctx.send(f"The current time in **{target}** is estimated to be **{formatted_time}**.")
         elif rows:
             if rows[0]['timezone_name']:
-                formatted_time = (discord.utils.utcnow().astimezone(pytz.timezone(rows[0]['timezone_name']))).strftime('%-I:%M %p')
+                formatted_time = (discord.utils.utcnow().astimezone(
+                    pytz.timezone(rows[0]['timezone_name']))).strftime('%-I:%M %p')
             else:
-                formatted_time = (discord.utils.utcnow() + timedelta(minutes=rows[0]['timezone_offset'])).strftime('%-I:%M %p')
+                formatted_time = (discord.utils.utcnow(
+                ) + timedelta(minutes=rows[0]['timezone_offset'])).strftime('%-I:%M %p')
             await ctx.send(f"The current time for {target.mention} is estimated to be **{formatted_time}**.", allowed_mentions=discord.AllowedMentions.none())
 
 

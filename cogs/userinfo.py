@@ -27,8 +27,9 @@ class UserInfo(vbu.Cog):
     async def enlarge(
             self,
             ctx: vbu.Context,
-            target: typing.Union[discord.Member, discord.User, discord.Emoji, discord.PartialEmoji] = None,
-            ):
+            target: typing.Union[discord.Member, discord.User,
+                                 discord.Emoji, discord.PartialEmoji] = None,
+    ):
         """
         Enlarges the avatar or given emoji.
         """
@@ -154,7 +155,8 @@ class UserInfo(vbu.Cog):
         async with ctx.typing():
 
             # Send data to the API
-            data.update({"users": data_authors, "messages": data_messages[::-1]})
+            data.update(
+                {"users": data_authors, "messages": data_messages[::-1]})
             async with self.bot.session.post("https://voxelfox.co.uk/discord/chatlog", json=data) as r:
                 string = io.StringIO(await r.text())
 
@@ -258,7 +260,8 @@ class UserInfo(vbu.Cog):
                 # "no-stop-slow-scripts": "",
             }
             filename = f"FakedMessage-{ctx.author.id}.png"
-            from_string = functools.partial(imgkit.from_string, subset, filename, options=options)
+            from_string = functools.partial(
+                imgkit.from_string, subset, filename, options=options)
             await self.bot.loop.run_in_executor(None, from_string)
 
         # Output it into the chat

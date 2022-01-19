@@ -139,7 +139,8 @@ class UserPoints(vbu.Cog):
             if len(valid_users) >= 30:
                 break
         with vbu.Embed(use_random_colour=True) as embed:
-            embed.description = '\n'.join(valid_users) or 'Nobody is on here :c'
+            embed.description = '\n'.join(
+                valid_users) or 'Nobody is on here :c'
 
         # Output
         await ctx.send(embed=embed)
@@ -199,7 +200,8 @@ class UserPoints(vbu.Cog):
             if len(valid_users) >= 30:
                 break
         with vbu.Embed(use_random_colour=True) as embed:
-            embed.description = '\n'.join(valid_users) or 'Nobody is on here :c'
+            embed.description = '\n'.join(
+                valid_users) or 'Nobody is on here :c'
 
         # Output
         await message.edit(content=None, embed=embed)
