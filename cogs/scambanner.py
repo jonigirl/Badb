@@ -43,8 +43,7 @@ class ScamBanner(vbu.Cog):
 
         # Ban the user
         try:
-            await message.author.ban(
-                reason=f"Suspected scam link ({match.group(3)})")
+            await message.author.ban(reason=f"Suspected scam link ({match.group(3)})")
         except discord.HTTPException:
             pass
 

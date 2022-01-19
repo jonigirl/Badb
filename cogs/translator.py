@@ -19,11 +19,19 @@ class Translator(vbu.Cog):
             try:
                 lang_id = self.gs.detect(text)
                 lang = self.gs.get_languages()[lang_id]
-                await ctx.send("{} (detected as {} ({}))".format(self.gs.translate(text, to_lang), lang, lang_id))
+                await ctx.send(
+                    "{} (detected as {} ({}))".format(
+                        self.gs.translate(text, to_lang), lang, lang_id
+                    )
+                )
             except Exception as e:
                 await ctx.send("An error occured while translating. ({})".format(e))
         else:
-            await ctx.send("That language could not be found in the list, for a list of supported languages do {}translate langlist".format(ctx.prefix))
+            await ctx.send(
+                "That language could not be found in the list, for a list of supported languages do {}translate langlist".format(
+                    ctx.prefix
+                )
+            )
 
     @translate.command()
     async def langlist(self, ctx):

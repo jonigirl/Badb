@@ -11,7 +11,6 @@ import imgkit
 
 
 class UserInfo(vbu.Cog):
-
     @vbu.command(
         aliases=["avatar", "av"],
         application_command_meta=commands.ApplicationCommandMeta(
@@ -25,10 +24,11 @@ class UserInfo(vbu.Cog):
         ),
     )
     async def enlarge(
-            self,
-            ctx: vbu.Context,
-            target: typing.Union[discord.Member, discord.User,
-                                 discord.Emoji, discord.PartialEmoji] = None,
+        self,
+        ctx: vbu.Context,
+        target: typing.Union[
+            discord.Member, discord.User, discord.Emoji, discord.PartialEmoji
+        ] = None,
     ):
         """
         Enlarges the avatar or given emoji.
@@ -117,9 +117,13 @@ class UserInfo(vbu.Cog):
         # Create the data we're gonna send
         data = {
             "channel_name": ctx.channel.name,
-            "category_name": ctx.channel.category.name if ctx.channel.category else "Uncategorized",
+            "category_name": ctx.channel.category.name
+            if ctx.channel.category
+            else "Uncategorized",
             "guild_name": ctx.guild.name,
-            "guild_icon_url": str(ctx.guild.icon.with_format("png").with_size(512)) if ctx.guild.icon else None,
+            "guild_icon_url": str(ctx.guild.icon.with_format("png").with_size(512))
+            if ctx.guild.icon
+            else None,
         }
         data_authors = {}
         data_messages = []
@@ -130,7 +134,9 @@ class UserInfo(vbu.Cog):
                 data_authors[user.id] = {
                     "username": user.name,
                     "discriminator": user.discriminator,
-                    "avatar_url": str(user.display_avatar.with_size(512).with_format("png").url),
+                    "avatar_url": str(
+                        user.display_avatar.with_size(512).with_format("png").url
+                    ),
                     "bot": user.bot,
                     "display_name": user.display_name,
                     "color": user.colour.value,
@@ -146,26 +152,33 @@ class UserInfo(vbu.Cog):
             for i in message.embeds:
                 embed_data: dict = i.to_dict()  # type: ignore
                 if i.timestamp:
-                    embed_data.update({'timestamp': i.timestamp.timestamp()})
+                    embed_data.update({"timestamp": i.timestamp.timestamp()})
                 embeds.append(embed_data)
-            message_data.update({'embeds': embeds})
+            message_data.update({"embeds": embeds})
             data_messages.append(message_data)
 
         # This takes a while
         async with ctx.typing():
 
             # Send data to the API
-            data.update(
-                {"users": data_authors, "messages": data_messages[::-1]})
-            async with self.bot.session.post("https://voxelfox.co.uk/discord/chatlog", json=data) as r:
+            data.update({"users": data_authors, "messages": data_messages[::-1]})
+            async with self.bot.session.post(
+                "https://voxelfox.co.uk/discord/chatlog", json=data
+            ) as r:
                 string = io.StringIO(await r.text())
 
         # Output it into the chat
-        await ctx.send(file=discord.File(string, filename=f"Logs-{int(ctx.message.created_at.timestamp())}.html"))
+        await ctx.send(
+            file=discord.File(
+                string, filename=f"Logs-{int(ctx.message.created_at.timestamp())}.html"
+            )
+        )
 
     @commands.context_command(name="Screenshot message")
     @commands.guild_only()
-    async def _context_command_screenshot_message(self, ctx: vbu.Context, message: discord.Message):
+    async def _context_command_screenshot_message(
+        self, ctx: vbu.Context, message: discord.Message
+    ):
         command = self.screenshotmessage
         await command.can_run(ctx)
         await ctx.invoke(command, user=message.author, content=message)
@@ -189,7 +202,13 @@ class UserInfo(vbu.Cog):
     )
     @commands.defer()
     @commands.guild_only()
-    async def fakemessage(self, ctx: vbu.Context, user: discord.Member, *, content: typing.Union[str, discord.Message]):
+    async def fakemessage(
+        self,
+        ctx: vbu.Context,
+        user: discord.Member,
+        *,
+        content: typing.Union[str, discord.Message],
+    ):
         """
         Create a log of chat.
         """
@@ -206,15 +225,23 @@ class UserInfo(vbu.Cog):
         # Create the data we're gonna send
         data = {
             "channel_name": content_message.channel.name,
-            "category_name": content_message.channel.category.name if content_message.channel.category else "Uncategorized",
+            "category_name": content_message.channel.category.name
+            if content_message.channel.category
+            else "Uncategorized",
             "guild_name": content_message.guild.name,
-            "guild_icon_url": str(content_message.guild.icon.with_format("png").with_size(512)) if content_message.guild.icon else None,
+            "guild_icon_url": str(
+                content_message.guild.icon.with_format("png").with_size(512)
+            )
+            if content_message.guild.icon
+            else None,
         }
         data_authors = {}
         data_authors[user.id] = {
             "username": user.name,
             "discriminator": user.discriminator,
-            "avatar_url": str(user.display_avatar.with_size(512).with_format("png").url),
+            "avatar_url": str(
+                user.display_avatar.with_size(512).with_format("png").url
+            ),
             "bot": user.bot,
             "display_name": user.display_name,
             "color": user.colour.value,
@@ -223,7 +250,9 @@ class UserInfo(vbu.Cog):
             data_authors[i.id] = {
                 "username": i.name,
                 "discriminator": i.discriminator,
-                "avatar_url": str(i.display_avatar.with_size(512).with_format("png").url),
+                "avatar_url": str(
+                    i.display_avatar.with_size(512).with_format("png").url
+                ),
                 "bot": i.bot,
                 "display_name": i.display_name,
                 "color": i.colour.value,
@@ -240,7 +269,9 @@ class UserInfo(vbu.Cog):
 
             # Send data to the API
             data.update({"users": data_authors, "messages": [message_data]})
-            async with self.bot.session.post("https://voxelfox.co.uk/discord/chatlog", json=data) as r:
+            async with self.bot.session.post(
+                "https://voxelfox.co.uk/discord/chatlog", json=data
+            ) as r:
                 string = await r.text()
 
             # Remove the preamble
@@ -261,7 +292,8 @@ class UserInfo(vbu.Cog):
             }
             filename = f"FakedMessage-{ctx.author.id}.png"
             from_string = functools.partial(
-                imgkit.from_string, subset, filename, options=options)
+                imgkit.from_string, subset, filename, options=options
+            )
             await self.bot.loop.run_in_executor(None, from_string)
 
         # Output it into the chat
