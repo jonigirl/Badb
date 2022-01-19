@@ -12,7 +12,7 @@ class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='clear', hidden=True)
+    @commands.command(name="clear", hidden=True)
     @commands.has_permissions(administrator=True)
     async def delete_messages(self, ctx, limit: int = 1):
         """Deletes the latest messages in the channel. The invoking message is deleted.
@@ -26,7 +26,7 @@ class Admin(commands.Cog):
         await ctx.message.delete()
         await ctx.channel.purge(limit=limit)
 
-    @commands.command(name='say', hidden=True)
+    @commands.command(name="say", hidden=True)
     @commands.is_owner()
     async def repeat_message(self, ctx, *, msg: str):
         """Repeats the message as the bot. The invoking message is deleted.
@@ -40,7 +40,7 @@ class Admin(commands.Cog):
         await ctx.message.delete()
         await ctx.send(msg)
 
-    @commands.command(name='spam', hidden=True)
+    @commands.command(name="spam", hidden=True)
     @commands.has_permissions(manage_messages=True)
     @checks.is_registered()
     async def delete_spam_messages(self, ctx):
@@ -65,12 +65,12 @@ class Admin(commands.Cog):
         await ctx.channel.delete_messages(spam)
         if len(spam) > 1:
             embed = quickembed.info(
-                '```Deleted {} spam messages```'.format(len(spam)),
+                "```Deleted {} spam messages```".format(len(spam)),
                 DiscordUser(ctx.author),
             )
             self.bot.log(embed=embed)
 
-    @commands.command(name='mute', hidden=True)
+    @commands.command(name="mute", hidden=True)
     @commands.has_permissions(manage_roles=True)
     @checks.is_registered()
     async def mute_member(self, ctx, member: discord.Member):
@@ -87,21 +87,19 @@ class Admin(commands.Cog):
         :param member:
         """
         user = DiscordUser(ctx.author)
-        role = discord.utils.find(lambda r: r.name == 'Muted', ctx.guild.roles)
+        role = discord.utils.find(lambda r: r.name == "Muted", ctx.guild.roles)
         if not role:
-            embed = quickembed.error(
-                desc='`Muted` role does not exist', user=user)
+            embed = quickembed.error(desc="`Muted` role does not exist", user=user)
         elif role not in member.roles:
             await member.add_roles(role)
-            embed = quickembed.success(
-                desc='Muted {}'.format(member), user=user)
+            embed = quickembed.success(desc="Muted {}".format(member), user=user)
         else:
             embed = quickembed.error(
-                desc='{} is already muted'.format(member), user=user
+                desc="{} is already muted".format(member), user=user
             )
         await ctx.send(embed=embed)
 
-    @commands.command(name='unmute', hidden=True)
+    @commands.command(name="unmute", hidden=True)
     @commands.has_permissions(manage_roles=True)
     @checks.is_registered()
     async def unmute_member(self, ctx, member: discord.Member):
@@ -118,17 +116,15 @@ class Admin(commands.Cog):
         :param member:
         """
         user = DiscordUser(ctx.author)
-        role = discord.utils.find(lambda r: r.name == 'Muted', ctx.guild.roles)
+        role = discord.utils.find(lambda r: r.name == "Muted", ctx.guild.roles)
         if not role:
-            embed = quickembed.error(
-                desc='`Muted` role does not exist', user=user)
+            embed = quickembed.error(desc="`Muted` role does not exist", user=user)
         elif role in member.roles:
             await member.remove_roles(role)
-            embed = quickembed.success(
-                desc='Unmuted {}'.format(member), user=user)
+            embed = quickembed.success(desc="Unmuted {}".format(member), user=user)
         else:
             embed = quickembed.error(
-                desc='{} is already unmuted'.format(member), user=user
+                desc="{} is already unmuted".format(member), user=user
             )
         await ctx.send(embed=embed)
 
