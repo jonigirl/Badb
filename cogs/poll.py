@@ -1,5 +1,6 @@
 from discord.ext import commands
 import asyncio
+import logging
 
 
 def to_emoji(c):
@@ -45,7 +46,8 @@ class Polls(commands.Cog):
 
         try:
             await ctx.channel.delete_messages(messages)
-        except:
+        except Exception as e:
+            logging.exception(e)
             pass  # oh well
 
         answer = '\n'.join(
@@ -82,7 +84,8 @@ class Polls(commands.Cog):
 
         try:
             await ctx.message.delete()
-        except:
+        except Exception as e:
+            logging.exception(e)
             pass
 
         body = "\n".join(f"{key}: {c}" for key, c in choices)
