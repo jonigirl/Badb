@@ -27,56 +27,59 @@ def check_if_user_exists(guild_id: int, user_id: int):
         except KeyError:
             load[str(guild_id)][str(user_id)] = []
 
+# this function will return with all the user's warns
+
+
+def get_user_warns(guild_id: int, user_id: int):
+    with open("data/warns.json", "r") as f:
+        load = json.load(f)
+
+    warnings = load[str(guild_id)][str(user_id)]
+
+    return warnings
+
+    # this functions removes a warning from the user's warns
+
+
+def remove_warn(guild_id: int, user_id: int, warn_id: int):
+    with open("data/warns.json", "r") as f:
+        load = json.load(f)
+
+    warnings = get_user_warns(guild_id, user_id)
+
+    for x in warnings:
+        if x["warn"]["id"] == warn_id:
+            jsonForm = {
+                "warn": {
+                    "id": warn_id,
+                    "reason": x["warn"]["reason"],
+                    "staffID": x["warn"]["staffID"],
+                }
+            }
+            load[str(guild_id)][str(user_id)].remove(jsonForm)
+
+
+def add_warn(guild_id: int, user_id: int, staff_id: int, reason):
+    with open("warns.json", "r") as f:
+        load = json.load(f)
+
+    numbers = string.digits
+    random_num = random.sample(numbers, 5)
+    code = "".join(random_num)
+
+    jsonForm = {"warn": {"id": code, "reason": reason, "staffID": staff_id}}
+
+    load[str(guild_id)][str(user_id)].append(jsonForm)
+
+    with open("data/warns.json", "w") as f:
+        json.dump(load, f, indent=4)
+
+    return code
+
 
 class Warns(vbu.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    def add_warn(guild_id: int, user_id: int, staff_id: int, reason):
-        with open("warns.json", "r") as f:
-            load = json.load(f)
-
-        numbers = string.digits
-        random_num = random.sample(numbers, 5)
-        code = "".join(random_num)
-
-        jsonForm = {"warn": {"id": code, "reason": reason, "staffID": staff_id}}
-
-        load[str(guild_id)][str(user_id)].append(jsonForm)
-
-        with open("data/warns.json", "w") as f:
-            json.dump(load, f, indent=4)
-
-        return code
-
-    # this function will return with all the user's warns
-
-    def get_user_warns(guild_id: int, user_id: int):
-        with open("data/warns.json", "r") as f:
-            load = json.load(f)
-
-        warnings = load[str(guild_id)][str(user_id)]
-
-        return warnings
-
-    # this functions removes a warning from the user's warns
-
-    def remove_warn(guild_id: int, user_id: int, warn_id: int):
-        with open("data/warns.json", "r") as f:
-            load = json.load(f)
-
-        warnings = get_user_warns(guild_id, user_id)
-
-        for x in warnings:
-            if x["warn"]["id"] == warn_id:
-                jsonForm = {
-                    "warn": {
-                        "id": warn_id,
-                        "reason": x["warn"]["reason"],
-                        "staffID": x["warn"]["staffID"],
-                    }
-                }
-                load[str(guild_id)][str(user_id)].remove(jsonForm)
 
     @vbu.command()
     # this will make it required to have the "kick members" permissions to use the command
