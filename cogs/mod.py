@@ -1,14 +1,13 @@
-import json
-
 import asyncio
 import discord
+import json
 import time
 
-from Tools.utils import getConfig
-from Tools.utils import getGuildPrefix
-from Tools.utils import updateConfig
+from discord.ext import commands
 from discord.ext import vbu
-from discord.ext import vbu
+from utils import getConfig
+from utils import getGuildPrefix
+from utils import updateConfig
 
 
 class Moderation(vbu.Cog):
