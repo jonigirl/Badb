@@ -1,13 +1,16 @@
-import io
-from datetime import datetime as dt
-import typing
 import asyncio
 import functools
+import io
+import typing
+
+from datetime import datetime as dt
 
 import discord
-from discord.ext import commands, vbu
-from bs4 import BeautifulSoup
 import imgkit
+
+from bs4 import BeautifulSoup
+from discord.ext import commands
+from discord.ext import vbu
 
 
 class UserInfo(vbu.Cog):

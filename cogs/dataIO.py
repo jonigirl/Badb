@@ -1,5 +1,7 @@
-from discord.ext import commands, vbu
 import json
+
+from discord.ext import commands
+from discord.ext import vbu
 
 
 class DataIO(vbu.Cog):

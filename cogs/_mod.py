@@ -1,11 +1,13 @@
 import json
 
+import asyncio
 import discord
 import time
-import asyncio
 
+from Tools.utils import getConfig
+from Tools.utils import getGuildPrefix
+from Tools.utils import updateConfig
 from discord.ext import commands
-from Tools.utils import getGuildPrefix, getConfig, updateConfig
 
 
 class Moderation(commands.Cog):
