@@ -8,14 +8,19 @@ from discord.ext import commands
 from discord.ext import vbu
 
 
+class Warns(vbu.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+
 def check_if_guild_exists(guild_id: int):
     with open("data/warns.json", "r") as f:
         load = json.load(f)
 
-        try:
-            load[str(guild_id)]
-        except KeyError:
-            load[str(guild_id)] = {}
+    try:
+        load[str(guild_id)]
+    except KeyError:
+        load[str(guild_id)] = {}
 
 
 def check_if_user_exists(guild_id: int, user_id: int):
@@ -39,6 +44,38 @@ def get_user_warns(guild_id: int, user_id: int):
     return warnings
 
     # this functions removes a warning from the user's warns
+    @vbu.command()
+    # this will make it required to have the "kick members" permissions to use the command
+    @commands.has_permissions(kick_members=True)
+    async def warn(ctx, member: discord.Member, *, reason="No reason provided"):
+        """Warns a member.
+
+        .. Note::
+            Must have kick members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
+        check_if_guild_exists(ctx.guild.id)
+        check_if_user_exists(ctx.guild.id, member.id)
+        code = add_warn(ctx.guild.id, member.id, ctx.author.id, reason)
+
+        embed = discord.Embed(
+            color=ctx.author.color,
+            title=f"Warning ID: {code}",
+            description=f"✅ Warned **{member}** for : {reason}",
+        )
+        await ctx.send(embed=embed)
+        embed2 = discord.Embed(
+            color=ctx.author.color,
+            title=f"You have been warned in {ctx.guild.name}!",
+            description=f"**Warning ID:** `{code}`\n**Reason:** {reason}",
+        )
+        try:
+            await member.send(embed=embed2)
+        except Exception as e:
+            logging.exception(e)
+            pass
 
 
 def remove_warn(guild_id: int, user_id: int, warn_id: int):
@@ -75,44 +112,6 @@ def add_warn(guild_id: int, user_id: int, staff_id: int, reason):
         json.dump(load, f, indent=4)
 
     return code
-
-
-class Warns(vbu.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @vbu.command()
-    # this will make it required to have the "kick members" permissions to use the command
-    @commands.has_permissions(kick_members=True)
-    async def warn(ctx, member: discord.Member, *, reason="No reason provided"):
-        """Warns a member.
-
-        .. Note::
-            Must have kick members permission
-
-        :param ctx: The invocation context.
-        :param msg: The message the bot will repeat.
-        """
-        check_if_guild_exists(ctx.guild.id)
-        check_if_user_exists(ctx.guild.id, member.id)
-        code = add_warn(ctx.guild.id, member.id, ctx.author.id, reason)
-
-        embed = discord.Embed(
-            color=ctx.author.color,
-            title=f"Warning ID: {code}",
-            description=f"✅ Warned **{member}** for : {reason}",
-        )
-        await ctx.send(embed=embed)
-        embed2 = discord.Embed(
-            color=ctx.author.color,
-            title=f"You have been warned in {ctx.guild.name}!",
-            description=f"**Warning ID:** `{code}`\n**Reason:** {reason}",
-        )
-        try:
-            await member.send(embed=embed2)
-        except Exception as e:
-            logging.exception(e)
-            pass
 
     @vbu.command(aliases=["ws", "warnings"])
     # this will make it required to have "ban members" permissions to use the command
