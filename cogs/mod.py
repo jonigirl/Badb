@@ -5,9 +5,9 @@ import time
 
 from discord.ext import commands
 from discord.ext import vbu
-from utils import getConfig
-from utils import getGuildPrefix
-from utils import updateConfig
+# from utils import getConfig
+# from utils import getGuildPrefix
+# from utils import updateConfig
 
 
 class Moderation(vbu.Cog):
