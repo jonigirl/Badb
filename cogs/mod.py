@@ -39,7 +39,7 @@ class Moderation(vbu.Cog):
         usage="<member> [reason]",
         description="Kicks a user from the server",
     )
-    @vbu.has_permissions(kick_members=True)
+    @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason="No reason provided"):
         if member.id == ctx.author.id:
             await ctx.send("You cannot kick yourself!")
@@ -60,7 +60,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         usage="<member> [reason]", name="ban", description="Bans a user from the server"
     )
-    @vbu.has_permissions(ban_members=True)
+    @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason="No reason provided"):
         if member.id == ctx.author.id:
             await ctx.send("You cannot ban yourself!")
@@ -81,7 +81,7 @@ class Moderation(vbu.Cog):
         name="softban",
         description="Bans a user from the server and deletes all of his messages of the last 7 days",
     )
-    @vbu.has_permissions(ban_members=True)
+    @commands.has_permissions(ban_members=True)
     async def softban(
         self, ctx, member: discord.Member, *, reason="No reason provided"
     ):
@@ -102,7 +102,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         usage="<id>", name="unban", description="Unbans a user from the server"
     )
-    @vbu.has_permissions(ban_members=True)
+    @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, user_id: int):
         user = await self.client.fetch_user(user_id)
         await ctx.guild.unban(user)
@@ -117,7 +117,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         usage="amount", name="clear", description="Deletes a certain number of messages"
     )
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=0):
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send(f"I have cleared **{amount}** messages.", delete_after=3)
@@ -125,7 +125,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         usage="<member> [reason]", name="mute", description="Mutes a user on the server"
     )
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, *, reason="No reason provided"):
         guild = ctx.guild
         mutedRole = discord.utils.get(guild.roles, name="Muted")
@@ -152,7 +152,7 @@ class Moderation(vbu.Cog):
         await ctx.send(embed=mute)
 
     @vbu.command(usage="<member>", name="Unmutes a user on the server")
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, member: discord.Member):
         mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
 
@@ -168,7 +168,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         name="nuke", description="Clones a text channel and then deletes the old one"
     )
-    @vbu.has_permissions(administrator=True)
+    @commands.has_permissions(administrator=True)
     @vbu.cooldown(1, 60, vbu.BucketType.guild)
     async def nuke(self, ctx):
         channelthings = [ctx.channel.category, ctx.channel.position]
@@ -183,7 +183,7 @@ class Moderation(vbu.Cog):
         name="role",
         description="Adds or removes a role from a user",
     )
-    @vbu.has_permissions(manage_roles=True)
+    @commands.has_permissions(manage_roles=True)
     async def role(self, ctx, addORremove, member: discord.Member, role: discord.Role):
 
         addORremove = addORremove.lower()
@@ -221,7 +221,7 @@ class Moderation(vbu.Cog):
             await ctx.send(f"I have removed {member.mention} the role {role.mention}")
 
     @vbu.command(usage="<seconds>")
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def slowmode(self, ctx, seconds: int):
         await ctx.channel.edit(slowmode_delay=seconds)
         await ctx.send(
