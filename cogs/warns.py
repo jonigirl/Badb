@@ -60,7 +60,7 @@ def remove_warn(guild_id: int, user_id: int, warn_id: int):
 
 
 def add_warn(guild_id: int, user_id: int, staff_id: int, reason):
-    with open("warns.json", "r") as f:
+    with open("data/warns.json", "r") as f:
         load = json.load(f)
 
     numbers = string.digits
