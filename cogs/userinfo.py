@@ -307,6 +307,9 @@ class UserInfo(vbu.Cog):
         await asyncio.create_subprocess_exec("rm", filename)
 
 
+# test
+
+
 def setup(bot: vbu.Bot):
     x = UserInfo(bot)
     bot.add_cog(x)
