@@ -166,7 +166,7 @@ class UserInfo(vbu.Cog):
             # Send data to the API
             data.update({"users": data_authors, "messages": data_messages[::-1]})
             async with self.bot.session.post(
-                "https://voxelfox.co.uk/discord/chatlog", json=data
+                "", json=data
             ) as r:
                 string = io.StringIO(await r.text())
 
@@ -270,12 +270,12 @@ class UserInfo(vbu.Cog):
         # This takes a while
         async with ctx.typing():
 
-            # # Send data to the API
-            # data.update({"users": data_authors, "messages": [message_data]})
-            # async with self.bot.session.post(
-            #     "https://voxelfox.co.uk/discord/chatlog", json=data
-            # ) as r:
-            #     string = await r.text()
+            # Send data to the API
+            data.update({"users": data_authors, "messages": [message_data]})
+            async with self.bot.session.post(
+                "", json=data
+            ) as r:
+                string = await r.text()
 
             # Remove the preamble
             soup = BeautifulSoup(string, "html.parser")
