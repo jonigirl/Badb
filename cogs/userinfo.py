@@ -44,7 +44,7 @@ class UserInfo(vbu.Cog):
             embed.set_image(url=str(url))
         await ctx.send(embed=embed)
 
-    @commands.context_command(name="Get user info")
+    @commands.context_command()
     async def _get_user_info(self, ctx: commands.SlashContext, user: discord.Member):
         command = self.whois
         await command.can_run(ctx)
@@ -64,10 +64,14 @@ class UserInfo(vbu.Cog):
         ),
     )
     async def whois(self, ctx: vbu.Context, user: discord.Member = None):
-        """
-        Give you some information about a user.
-        """
+        """Give you some information about a user.
 
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         # Set up our intial vars
         user = user or ctx.author
         embed = vbu.Embed(use_random_colour=True)
