@@ -6,7 +6,7 @@ from discord.ext import commands
 from discord.ext import vbu
 
 # editable parameters
-data_file_name = "data/badb.json"
+data_file_name = "data/tickets.json"
 
 
 class TicketCog(vbu.Cog):
@@ -70,7 +70,7 @@ class TicketCog(vbu.Cog):
             with open(data_file_name, "w") as f:
                 json.dump(data, f)
         except Exception as e:
-            logging.exception()
+            logging.exception(e)
             await ctx.send(
                 "[ERROR]: File " + data_file_name + ", it isn't writtable try again"
             )
@@ -93,7 +93,7 @@ class TicketCog(vbu.Cog):
                 if ctx.guild.get_role(role_id) in ctx.author.roles:
                     valid_user = True
             except Exception as e:
-                logging.exception()
+                logging.exception(e)
                 pass
 
         if ctx.author.guild_permissions.administrator or valid_user:
@@ -178,7 +178,7 @@ class TicketCog(vbu.Cog):
                 await ctx.channel.delete()
                 index = data["ticket-channel-ids"].index(channel_id)
                 del data["ticket-channel-ids"][index]
-                with open("data/badb.json", "w") as f:
+                with open("data/tickets.json", "w") as f:
                     json.dump(data, f)
                 fileObject = discord.File(f"tickets/{ticket_name}.txt")
                 for user in ctx.channel.members:
@@ -192,7 +192,7 @@ class TicketCog(vbu.Cog):
                         )
 
             except Exception as e:
-                logging.exception()
+                logging.exception(e)
                 pass
 
     @commands.command(
@@ -226,7 +226,7 @@ class TicketCog(vbu.Cog):
                     data["ticket-support-roles"].append(str(role_id.id))
                     if str(mentionRole) == "true":
                         data["roles-to-mention"].append(str(role_id.id))
-                    with open("data/badb.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
                     em = discord.Embed(
                         title="Add support",
@@ -296,7 +296,7 @@ class TicketCog(vbu.Cog):
                     index = valid_roles.index(str(role_id.id))
                     del valid_roles[index]
                     data["ticket-support-roles"] = valid_roles
-                    with open("data/badb.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
                     em = discord.Embed(
                         title="Delete Support",
@@ -364,7 +364,7 @@ class TicketCog(vbu.Cog):
 
                     data["roles-to-mention"].append(str(role_id.id))
 
-                    with open("data/badb.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
 
                     em = discord.Embed(
@@ -440,7 +440,7 @@ class TicketCog(vbu.Cog):
 
                     data["roles-to-mention"] = pinged_roles
 
-                    with open("data/badb.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
 
                     em = discord.Embed(

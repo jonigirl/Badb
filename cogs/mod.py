@@ -227,6 +227,49 @@ class Moderation(vbu.Cog):
             f"Slowmode is now enabled in this channel with a chat delay of {seconds} seconds."
         )
 
+    @vbu.command(name="say", hidden=True)
+    @commands.is_owner()
+    async def repeat_message(self, ctx, *, msg: str):
+        """Repeats the message as the bot. The invoking message is deleted.
+
+        .. Note::
+            Only the bot owner can use this.
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
+        await ctx.message.delete()
+        await ctx.send(msg)
+
+    @vbu.command(name="spam", hidden=True)
+    @commands.has_permissions(manage_messages=True)
+    async def delete_spam_messages(self, ctx):
+        """Deletes duplicate messages in the channel.
+
+        .. Note::
+            Messages are checked per author.
+            The original message will remain.
+
+        :param ctx: The invocation context.
+        """
+        msgs = []
+        spam = []
+        async for msg in ctx.channel.history(limit=50):
+            c = str(msg.author) + msg.content
+            if c in msgs:
+                spam.append(msg)
+            else:
+                msgs.append(c)
+
+        spam.append(ctx.message)
+        await ctx.channel.delete_messages(spam)
+        if len(spam) > 1:
+            embed = quickembed.info(
+                "```Deleted {} spam messages```".format(len(spam)),
+                DiscordUser(ctx.author),
+            )
+            self.bot.log(embed=embed)
+
 
 def setup(bot: vbu.Bot):
     x = Moderation(bot)
