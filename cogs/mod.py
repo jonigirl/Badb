@@ -169,7 +169,7 @@ class Moderation(vbu.Cog):
         name="nuke", description="Clones a text channel and then deletes the old one"
     )
     @commands.has_permissions(administrator=True)
-    @commands.cooldown(1, 60, vbu.BucketType.guild)
+    @commands.cooldown(1, 60, commands.BucketType.guild)
     async def nuke(self, ctx):
         channelthings = [ctx.channel.category, ctx.channel.position]
         await ctx.channel.clone()
