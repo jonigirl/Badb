@@ -3,9 +3,9 @@ import discord
 from discord.ext import commands
 from discord.ext import vbu
 
-from utils import checks
-from utils import quickembed
-from utils.fjclasses import DiscordUser
+# from utils import checks
+# from utils import quickembed
+# from utils.fjclasses import DiscordUser
 
 
 class Admin(vbu.Cog):
