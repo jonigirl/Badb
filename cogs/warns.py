@@ -8,27 +8,29 @@ from discord.ext import commands
 from discord.ext import vbu
 
 
-class Warns(vbu.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    def check_if_guild_exists(guild_id: int):
-        with open("data/warns.json", "r") as f:
-            load = json.load(f)
+def check_if_guild_exists(guild_id: int):
+    with open("data/warns.json", "r") as f:
+        load = json.load(f)
 
         try:
             load[str(guild_id)]
         except KeyError:
             load[str(guild_id)] = {}
 
-    def check_if_user_exists(guild_id: int, user_id: int):
-        with open("data/warns.json", "r") as f:
-            load = json.load(f)
+
+def check_if_user_exists(guild_id: int, user_id: int):
+    with open("data/warns.json", "r") as f:
+        load = json.load(f)
 
         try:
             load[str(guild_id)][str(user_id)]
         except KeyError:
             load[str(guild_id)][str(user_id)] = []
+
+
+class Warns(vbu.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
     def add_warn(guild_id: int, user_id: int, staff_id: int, reason):
         with open("warns.json", "r") as f:
