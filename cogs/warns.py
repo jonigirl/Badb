@@ -82,6 +82,14 @@ class Warns(vbu.Cog):
     # this will make it required to have the "kick members" permissions to use the command
     @commands.has_permissions(kick_members=True)
     async def warn(ctx, member: discord.Member, *, reason="No reason provided"):
+        """Warns a member.
+
+        .. Note::
+            Must have kick members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         check_if_guild_exists(ctx.guild.id)
         check_if_user_exists(ctx.guild.id, member.id)
         code = add_warn(ctx.guild.id, member.id, ctx.author.id, reason)
@@ -107,6 +115,14 @@ class Warns(vbu.Cog):
     # this will make it required to have "ban members" permissions to use the command
     @commands.has_permissions(ban_members=True)
     async def warns(ctx, member: discord.Member):
+        """Lists a members warns.
+
+        .. Note::
+            Must have ban members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         check_if_guild_exists(ctx.guild.id)
         check_if_user_exists(ctx.guild.id, member.id)
         warns = get_user_warns(ctx.guild.id, member.id)
@@ -138,6 +154,14 @@ class Warns(vbu.Cog):
     @vbu.command()
     @commands.has_permissions(kick_members=True)
     async def unwarn(ctx, member: discord.Member, warn_id: int):
+        """Removes a members warn.
+
+        .. Note::
+            Must have kick members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         check_if_guild_exists(ctx.guild.id)
         check_if_user_exists(ctx.guild.id, member.id)
         remove_warn(ctx.guild.id, member.id, warn_id)
