@@ -14,6 +14,14 @@ class Moderation(vbu.Cog):
     @vbu.command(usage="[#channel/id]", name="lock", description="Locks a channel")
     @commands.has_permissions(manage_messages=True)
     async def lock(self, ctx, channel: discord.TextChannel = None):
+        """Locks a text channel.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
         overwrite.send_messages = False
@@ -23,6 +31,14 @@ class Moderation(vbu.Cog):
     @vbu.command(usage="[#channel/id]", name="unlock", description="Unlocks a channel")
     @commands.has_permissions(manage_messages=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None):
+        """Unlocks a text channel.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
         overwrite.send_messages = True
@@ -36,6 +52,12 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason="No reason provided"):
+        """Kicks a user from the server.
+        .. Note::
+            Must have kick members permission
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         if member.id == ctx.author.id:
             await ctx.send("You cannot kick yourself!")
             return
@@ -57,6 +79,14 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason="No reason provided"):
+        """Bans a member from the server.
+
+        .. Note::
+            Must have ban members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         if member.id == ctx.author.id:
             await ctx.send("You cannot ban yourself!")
             return
@@ -80,6 +110,15 @@ class Moderation(vbu.Cog):
     async def softban(
         self, ctx, member: discord.Member, *, reason="No reason provided"
     ):
+        """Bans a member from the server and deletes
+        all of his messages of the last 7 days.
+
+        .. Note::
+            Must have ban members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         if member.id == ctx.author.id:
             await ctx.send("You cannot ban yourself!")
             return
@@ -99,6 +138,14 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, user_id: int):
+        """Unbans a member from the server.
+
+        .. Note::
+            Must have ban members permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         user = await self.client.fetch_user(user_id)
         await ctx.guild.unban(user)
         unban = discord.Embed(
@@ -114,6 +161,14 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=0):
+        """Clears channel history of x messages.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send(f"I have cleared **{amount}** messages.", delete_after=3)
 
@@ -122,6 +177,14 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, *, reason="No reason provided"):
+        """Mutes a member and gived the the Muted role.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         guild = ctx.guild
         mutedRole = discord.utils.get(guild.roles, name="Muted")
 
@@ -149,6 +212,14 @@ class Moderation(vbu.Cog):
     @vbu.command(usage="<member>", name="Unmutes a user on the server")
     @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, member: discord.Member):
+        """Unmutes a member that has been prevously muted.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
 
         await member.remove_roles(mutedRole)
@@ -166,6 +237,14 @@ class Moderation(vbu.Cog):
     @commands.has_permissions(administrator=True)
     @commands.cooldown(1, 60, commands.BucketType.guild)
     async def nuke(self, ctx):
+        """Clones a test channel the nukes the old one.
+
+        .. Note::
+            Must be administrator
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         channelthings = [ctx.channel.category, ctx.channel.position]
         await ctx.channel.clone()
         await ctx.channel.delete()
@@ -180,7 +259,14 @@ class Moderation(vbu.Cog):
     )
     @commands.has_permissions(manage_roles=True)
     async def role(self, ctx, addORremove, member: discord.Member, role: discord.Role):
+        """Adds or Removes roles to members.
 
+        .. Note::
+            Must have manage roles permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         addORremove = addORremove.lower()
 
         if addORremove == "add":
@@ -222,6 +308,14 @@ class Moderation(vbu.Cog):
     @vbu.command(usage="<seconds>")
     @commands.has_permissions(manage_messages=True)
     async def slowmode(self, ctx, seconds: int):
+        """Invokes slowmode for the channel for the stated seconds.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         await ctx.channel.edit(slowmode_delay=seconds)
         await ctx.send(
             f"Slowmode is now enabled in this channel with a chat delay of {seconds} seconds."
