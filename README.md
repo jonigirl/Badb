@@ -6,7 +6,7 @@ v0.4.0a
 ![Last commit](https://img.shields.io/github/last-commit/jonigirl/badb)
 ![GitHub issues badge](https://img.shields.io/github/issues-raw/jonigirl/badb)  
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Lint](https://github.com/jonigirl/Badb/actions/workflows/black.yaml/badge.svg)](https://github.com/jonigirl/Badb/actions/workflows/black.yaml)  
+[![Lint](https://github.com/jonigirl/Badb/actions/workflows/black.yaml/badge.svg)](https://github.com/jonigirl/Badb/actions/workflows/black.yaml)
 [![CodeQL](https://github.com/jonigirl/Badb/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/jonigirl/Badb/actions/workflows/codeql-analysis.yml)  
 ![License MIT badge](https://img.shields.io/github/license/jonigirl/badb)
 
