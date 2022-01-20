@@ -15,7 +15,7 @@ class Moderation(vbu.Cog):
         self.bot = bot
 
     @vbu.command(usage="[#channel/id]", name="lock", description="Locks a channel")
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def lock(self, ctx, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
@@ -26,7 +26,7 @@ class Moderation(vbu.Cog):
     @vbu.command(
         usage="[#channel/id]", name="unlock", description="Unlocks a channel"
     )
-    @vbu.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
