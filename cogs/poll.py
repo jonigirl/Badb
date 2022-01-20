@@ -1,6 +1,7 @@
-from discord.ext import commands
 import asyncio
 import logging
+
+from discord.ext import commands
 
 
 def to_emoji(c):

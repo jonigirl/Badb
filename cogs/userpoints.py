@@ -1,6 +1,8 @@
-import typing
 import discord
-from discord.ext import commands, vbu
+import typing
+
+from discord.ext import commands
+from discord.ext import vbu
 
 
 class UserPoints(vbu.Cog):

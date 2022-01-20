@@ -1,7 +1,9 @@
-import json
 import discord
+import json
 import logging
-from discord.ext import commands, vbu
+
+from discord.ext import commands
+from discord.ext import vbu
 
 # editable parameters
 data_file_name = "data/badb.json"
