@@ -166,7 +166,7 @@ class UserInfo(vbu.Cog):
             # Send data to the API
             data.update({"users": data_authors, "messages": data_messages[::-1]})
             async with self.bot.session.post(
-                "", json=data
+                "https://local", json=data
             ) as r:
                 string = io.StringIO(await r.text())
 
@@ -273,7 +273,7 @@ class UserInfo(vbu.Cog):
             # Send data to the API
             data.update({"users": data_authors, "messages": [message_data]})
             async with self.bot.session.post(
-                "", json=data
+                "https://local", json=data
             ) as r:
                 string = await r.text()
 
