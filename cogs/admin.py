@@ -8,13 +8,13 @@ from utils import quickembed
 from utils.fjclasses import DiscordUser
 
 
-class Admin(commands.Cog):
+class Admin(vbu.Cog):
     """The Admin cog class."""
 
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="clear", hidden=True)
+    @vbu.command(name="clear", hidden=True)
     @commands.has_permissions(administrator=True)
     async def delete_messages(self, ctx, limit: int = 1):
         """Deletes the latest messages in the channel. The invoking message is deleted.
@@ -28,7 +28,7 @@ class Admin(commands.Cog):
         await ctx.message.delete()
         await ctx.channel.purge(limit=limit)
 
-    @commands.command(name="say", hidden=True)
+    @vbu.command(name="say", hidden=True)
     @commands.is_owner()
     async def repeat_message(self, ctx, *, msg: str):
         """Repeats the message as the bot. The invoking message is deleted.
@@ -42,7 +42,7 @@ class Admin(commands.Cog):
         await ctx.message.delete()
         await ctx.send(msg)
 
-    @commands.command(name="spam", hidden=True)
+    @vbu.command(name="spam", hidden=True)
     @commands.has_permissions(manage_messages=True)
     @checks.is_registered()
     async def delete_spam_messages(self, ctx):
@@ -72,7 +72,7 @@ class Admin(commands.Cog):
             )
             self.bot.log(embed=embed)
 
-    @commands.command(name="mute", hidden=True)
+    @vbu.command(name="mute", hidden=True)
     @commands.has_permissions(manage_roles=True)
     @checks.is_registered()
     async def mute_member(self, ctx, member: discord.Member):
@@ -101,7 +101,7 @@ class Admin(commands.Cog):
             )
         await ctx.send(embed=embed)
 
-    @commands.command(name="unmute", hidden=True)
+    @vbu.command(name="unmute", hidden=True)
     @commands.has_permissions(manage_roles=True)
     @checks.is_registered()
     async def unmute_member(self, ctx, member: discord.Member):
@@ -131,9 +131,6 @@ class Admin(commands.Cog):
         await ctx.send(embed=embed)
 
 
-def setup(bot):
-    """Required for cogs.
-
-    :param bot: The Discord bot.
-    """
-    bot.add_cog(Admin(bot))
+def setup(bot: vbu.Bot):
+    x = Admin(bot)
+    bot.add_cog(x)
