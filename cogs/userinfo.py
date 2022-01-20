@@ -44,11 +44,11 @@ class UserInfo(vbu.Cog):
             embed.set_image(url=str(url))
         await ctx.send(embed=embed)
 
-    @commands.context_command()
-    async def _get_user_info(self, ctx: commands.SlashContext, user: discord.Member):
-        command = self.whois
-        await command.can_run(ctx)
-        await ctx.invoke(command, user)
+    # @commands.context_command("Get user info")
+    # async def _get_user_info(self, ctx: commands.SlashContext, user: discord.Member):
+    #     command = self.whois
+    #     await command.can_run(ctx)
+    #     await ctx.invoke(command, user)
 
     @vbu.command(
         aliases=["whoami"],
