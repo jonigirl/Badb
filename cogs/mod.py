@@ -20,9 +20,7 @@ class Moderation(vbu.Cog):
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
         await ctx.send(f"{channel.mention} locked!")
 
-    @vbu.command(
-        usage="[#channel/id]", name="unlock", description="Unlocks a channel"
-    )
+    @vbu.command(usage="[#channel/id]", name="unlock", description="Unlocks a channel")
     @commands.has_permissions(manage_messages=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
@@ -196,7 +194,9 @@ class Moderation(vbu.Cog):
                 return await ctx.send("The member already has this role assigned!")
 
             if role.position >= ctx.guild.me.top_role.position:
-                return await ctx.send("This role is higher than my role, move it to the top!")
+                return await ctx.send(
+                    "This role is higher than my role, move it to the top!"
+                )
 
             await member.add_roles(role)
             await ctx.send(f"I have added {member.mention} the role {role.mention}")
@@ -212,7 +212,9 @@ class Moderation(vbu.Cog):
                 return await ctx.send("The member does not have this role!")
 
             if role.position >= ctx.guild.me.top_role.position:
-                return await ctx.send("This role is higher than my role, move it to the top!")
+                return await ctx.send(
+                    "This role is higher than my role, move it to the top!"
+                )
 
             await member.remove_roles(role)
             await ctx.send(f"I have removed {member.mention} the role {role.mention}")
