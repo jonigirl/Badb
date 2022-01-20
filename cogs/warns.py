@@ -12,20 +12,18 @@ class Warns(vbu.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
-def check_if_guild_exists(guild_id: int):
-    with open("warns.json", "r") as f:
-        load = json.load(f)
+    def check_if_guild_exists(guild_id: int):
+        with open("data/warns.json", "r") as f:
+            load = json.load(f)
 
         try:
             load[str(guild_id)]
         except KeyError:
             load[str(guild_id)] = {}
 
-
-def check_if_user_exists(guild_id: int, user_id: int):
-    with open("warns.json", "r") as f:
-        load = json.load(f)
+    def check_if_user_exists(guild_id: int, user_id: int):
+        with open("data/warns.json", "r") as f:
+            load = json.load(f)
 
         try:
             load[str(guild_id)][str(user_id)]
@@ -44,7 +42,7 @@ def check_if_user_exists(guild_id: int, user_id: int):
 
         load[str(guild_id)][str(user_id)].append(jsonForm)
 
-        with open("warns.json", "w") as f:
+        with open("data/warns.json", "w") as f:
             json.dump(load, f, indent=4)
 
         return code
@@ -52,7 +50,7 @@ def check_if_user_exists(guild_id: int, user_id: int):
     # this function will return with all the user's warns
 
     def get_user_warns(guild_id: int, user_id: int):
-        with open("warns.json", "r") as f:
+        with open("data/warns.json", "r") as f:
             load = json.load(f)
 
         warnings = load[str(guild_id)][str(user_id)]
@@ -62,7 +60,7 @@ def check_if_user_exists(guild_id: int, user_id: int):
     # this functions removes a warning from the user's warns
 
     def remove_warn(guild_id: int, user_id: int, warn_id: int):
-        with open("warns.json", "r") as f:
+        with open("data/warns.json", "r") as f:
             load = json.load(f)
 
         warnings = get_user_warns(guild_id, user_id)
