@@ -7,15 +7,16 @@ import time
 from Tools.utils import getConfig
 from Tools.utils import getGuildPrefix
 from Tools.utils import updateConfig
-from discord.ext import commands
+from discord.ext import vbu
+from discord.ext import vbu
 
 
-class Moderation(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+class Moderation(vbu.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
-    @commands.command(usage="[#channel/id]", name="lock", description="Locks a channel")
-    @commands.has_permissions(manage_messages=True)
+    @vbu.command(usage="[#channel/id]", name="lock", description="Locks a channel")
+    @vbu.has_permissions(manage_messages=True)
     async def lock(self, ctx, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
@@ -23,10 +24,10 @@ class Moderation(commands.Cog):
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
         await ctx.send(f"{channel.mention} locked!")
 
-    @commands.command(
+    @vbu.command(
         usage="[#channel/id]", name="unlock", description="Unlocks a channel"
     )
-    @commands.has_permissions(manage_messages=True)
+    @vbu.has_permissions(manage_messages=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         overwrite = channel.overwrites_for(ctx.guild.default_role)
@@ -34,12 +35,12 @@ class Moderation(commands.Cog):
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
         await ctx.send(f"{channel.mention} unlocked!")
 
-    @commands.command(
+    @vbu.command(
         name="kick",
         usage="<member> [reason]",
         description="Kicks a user from the server",
     )
-    @commands.has_permissions(kick_members=True)
+    @vbu.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason="No reason provided"):
         if member.id == ctx.author.id:
             await ctx.send("You cannot kick yourself!")
@@ -57,10 +58,10 @@ class Moderation(commands.Cog):
         kick.add_field(name="Reason", value=reason, inline=False)
         await ctx.send(embed=kick)
 
-    @commands.command(
+    @vbu.command(
         usage="<member> [reason]", name="ban", description="Bans a user from the server"
     )
-    @commands.has_permissions(ban_members=True)
+    @vbu.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason="No reason provided"):
         if member.id == ctx.author.id:
             await ctx.send("You cannot ban yourself!")
@@ -76,12 +77,12 @@ class Moderation(commands.Cog):
         ban.add_field(name="Reason", value=reason, inline=False)
         await ctx.send(embed=ban)
 
-    @commands.command(
+    @vbu.command(
         usage="<member> [reason]",
         name="softban",
         description="Bans a user from the server and deletes all of his messages of the last 7 days",
     )
-    @commands.has_permissions(ban_members=True)
+    @vbu.has_permissions(ban_members=True)
     async def softban(
         self, ctx, member: discord.Member, *, reason="No reason provided"
     ):
@@ -99,10 +100,10 @@ class Moderation(commands.Cog):
         softban.add_field(name="Reason", value=reason, inline=False)
         await ctx.send(embed=softban)
 
-    @commands.command(
+    @vbu.command(
         usage="<id>", name="unban", description="Unbans a user from the server"
     )
-    @commands.has_permissions(ban_members=True)
+    @vbu.has_permissions(ban_members=True)
     async def unban(self, ctx, *, user_id: int):
         user = await self.client.fetch_user(user_id)
         await ctx.guild.unban(user)
@@ -114,18 +115,18 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=unban)
 
-    @commands.command(
+    @vbu.command(
         usage="amount", name="clear", description="Deletes a certain number of messages"
     )
-    @commands.has_permissions(manage_messages=True)
+    @vbu.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=0):
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send(f"I have cleared **{amount}** messages.", delete_after=3)
 
-    @commands.command(
+    @vbu.command(
         usage="<member> [reason]", name="mute", description="Mutes a user on the server"
     )
-    @commands.has_permissions(manage_messages=True)
+    @vbu.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, *, reason="No reason provided"):
         guild = ctx.guild
         mutedRole = discord.utils.get(guild.roles, name="Muted")
@@ -151,8 +152,8 @@ class Moderation(commands.Cog):
         await member.add_roles(mutedRole, reason=reason)
         await ctx.send(embed=mute)
 
-    @commands.command(usage="<member>", name="Unmutes a user on the server")
-    @commands.has_permissions(manage_messages=True)
+    @vbu.command(usage="<member>", name="Unmutes a user on the server")
+    @vbu.has_permissions(manage_messages=True)
     async def unmute(self, ctx, member: discord.Member):
         mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
 
@@ -165,11 +166,11 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=unmute)
 
-    @commands.command(
+    @vbu.command(
         name="nuke", description="Clones a text channel and then deletes the old one"
     )
-    @commands.has_permissions(administrator=True)
-    @commands.cooldown(1, 60, commands.BucketType.guild)
+    @vbu.has_permissions(administrator=True)
+    @vbu.cooldown(1, 60, vbu.BucketType.guild)
     async def nuke(self, ctx):
         channelthings = [ctx.channel.category, ctx.channel.position]
         await ctx.channel.clone()
@@ -178,12 +179,12 @@ class Moderation(commands.Cog):
         await nukedchannel.edit(position=channelthings[1])
         await nukedchannel.send(f"Channel was nuked by {ctx.author.mention}")
 
-    @commands.command(
+    @vbu.command(
         usage="<add/remove> <member> <role>",
         name="role",
         description="Adds or removes a role from a user",
     )
-    @commands.has_permissions(manage_roles=True)
+    @vbu.has_permissions(manage_roles=True)
     async def role(self, ctx, addORremove, member: discord.Member, role: discord.Role):
 
         addORremove = addORremove.lower()
@@ -199,9 +200,7 @@ class Moderation(commands.Cog):
                 return await ctx.send("The member already has this role assigned!")
 
             if role.position >= ctx.guild.me.top_role.position:
-                return await ctx.send(
-                    f"This role is higher than my role, move it to the top!"
-                )
+                return await ctx.send("This role is higher than my role, move it to the top!")
 
             await member.add_roles(role)
             await ctx.send(f"I have added {member.mention} the role {role.mention}")
@@ -217,15 +216,13 @@ class Moderation(commands.Cog):
                 return await ctx.send("The member does not have this role!")
 
             if role.position >= ctx.guild.me.top_role.position:
-                return await ctx.send(
-                    f"This role is higher than my role, move it to the top!"
-                )
+                return await ctx.send("This role is higher than my role, move it to the top!")
 
             await member.remove_roles(role)
             await ctx.send(f"I have removed {member.mention} the role {role.mention}")
 
-    @commands.command(usage="<seconds>")
-    @commands.has_permissions(manage_messages=True)
+    @vbu.command(usage="<seconds>")
+    @vbu.has_permissions(manage_messages=True)
     async def slowmode(self, ctx, seconds: int):
         await ctx.channel.edit(slowmode_delay=seconds)
         await ctx.send(
@@ -233,5 +230,6 @@ class Moderation(commands.Cog):
         )
 
 
-def setup(client):
-    client.add_cog(Moderation(client))
+def setup(bot: vbu.Bot):
+    x = Moderation(bot)
+    bot.add_cog(x)
