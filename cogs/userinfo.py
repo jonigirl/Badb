@@ -177,7 +177,7 @@ class UserInfo(vbu.Cog):
             )
         )
 
-    @commands.context_command(name="Screenshot message")
+    @commands.context_command(name="Screenshot message", hidden=true)
     @commands.guild_only()
     async def _context_command_screenshot_message(
         self, ctx: vbu.Context, message: discord.Message
