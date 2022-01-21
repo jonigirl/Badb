@@ -34,6 +34,14 @@ class Warn(vbu.Cog):
     )
     @has_permissions(manage_messages=True)
     async def warn_command(self, ctx, user: discord.Member, *, reason: str):
+        """Warns a member.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         if user.id == self.bot.user.id:
             # User tried to warn this exact bot.
             await ctx.send(
@@ -50,7 +58,7 @@ class Warn(vbu.Cog):
                 "Why the heck would you warn yourself? You hate yourself THAT much?"
             )
             return
-        if user.guild_permissions.manage_messages == True:
+        if user.guild_permissions.manage_messages is True:
             # User mentioned another user who had the permission "Manage Messages"
             await ctx.send(
                 'The specified user has the "Manage Messages" permission (or higher) inside the guild/server.'
@@ -72,7 +80,7 @@ class Warn(vbu.Cog):
                     "warns": 1,
                     1: (
                         {
-                            "warner": tx.author.id,
+                            "warner": ctx.author.id,
                             "warner_name": ctx.author.name,
                             "reason": reason,
                             "channel": str(ctx.channel.id),
@@ -171,6 +179,14 @@ class Warn(vbu.Cog):
         aliases=["warnings"],
     )
     async def warns_command(self, ctx, user: discord.Member):
+        """Lists Warns a member has.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         try:
             with open(
                 "data/warns/" + str(ctx.guild.id) + "/" + str(user.id) + ".json", "r"
@@ -256,6 +272,14 @@ class Warn(vbu.Cog):
     )
     @has_permissions(manage_messages=True)
     async def remove_warn_command(self, ctx, user: discord.Member, *, warn: str):
+        """Removes a specific warn from a member.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         try:
             with open(
                 "data/warns/" + str(ctx.guild.id) + "/" + str(user.id) + ".json", "r"
@@ -367,6 +391,14 @@ class Warn(vbu.Cog):
     )
     @has_permissions(manage_messages=True)
     async def edit_warn_command(self, ctx, user: discord.Member, *, warn: str):
+        """Edits a specific warn against a member.
+
+        .. Note::
+            Must have manage messages permission
+
+        :param ctx: The invocation context.
+        :param msg: The message the bot will repeat.
+        """
         try:
             with open(
                 "data/warns/" + str(ctx.guild.id) + "/" + str(user.id) + ".json", "r"
