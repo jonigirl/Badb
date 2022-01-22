@@ -62,10 +62,10 @@ class TimezoneInfo(vbu.Cog):
         if offset is None:
             ask_message = await ctx.send(
                 (
-                    f"Hey, {ctx.author.mention}, what timezone are you currently \
-                in? You can give its name (`EST`, `GMT`, etc) "
+                    f"Hey, {ctx.author.mention}, what timezone are you \
+                    currently in? You can give its name (`EST`, `GMT`, etc) "
                     "or you can give your continent and nearest large city \
-                (`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
+                    (`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
                     "case sensitive."
                 )
             )
@@ -100,7 +100,8 @@ class TimezoneInfo(vbu.Cog):
         # Store it in the database
         async with vbu.Database() as db:
             await db(
-                """INSERT INTO user_settings (user_id, timezone_name) \VALUES ($1, $2) ON CONFLICT (user_id)
+                """INSERT INTO user_settings (user_id, timezone_name) \
+                VALUES ($1, $2) ON CONFLICT (user_id)
                 DO UPDATE SET timezone_name=excluded.timezone_name""",
                 ctx.author.id,
                 zone.zone,
