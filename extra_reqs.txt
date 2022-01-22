@@ -1,4 +1,0 @@
-beautifulsoup4==4.10.0
-goslate==1.5.2
-imgkit==1.2.2
-youtube_dl==2021.12.17
