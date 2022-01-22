@@ -63,10 +63,10 @@ class TimezoneInfo(vbu.Cog):
             ask_message = await ctx.send(
                 (
                     f"Hey, {ctx.author.mention}, what timezone are you in? "
-                    "You can give its name (`EST`, `GMT`, etc) "
-                    "or you can give your continent and nearest large city"
-                    "(`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
-                    "case sensitive."
+                    f"You can give its name (`EST`, `GMT`, etc), {chr(10)} "
+                    f"or you can give your continent and nearest large city"
+                    f"(`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
+                    f"case sensitive."
                 )
             )
             try:
