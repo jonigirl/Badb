@@ -12,7 +12,7 @@ from discord.ext import vbu
 
 
 class TimezoneInfo(vbu.Cog):
-    @vbu.group(
+    @commands.group(
         aliases=["tz"],
         application_command_meta=commands.ApplicationCommandMeta(),
     )
