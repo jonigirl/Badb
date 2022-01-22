@@ -62,7 +62,7 @@ class TimezoneInfo(vbu.Cog):
         if offset is None:
             ask_message = await ctx.send(
                 (
-                    f"Hey, {ctx.author.mention}, what timezone are you in?"
+                    f"Hey, {ctx.author.mention}, what timezone are you in? "
                     "You can give its name (`EST`, `GMT`, etc) "
                     "or you can give your continent and nearest large city"
                     "(`Europe/Amsterdam`, `Australia/Sydney`, etc) - this is "
