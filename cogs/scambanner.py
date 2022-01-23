@@ -20,14 +20,14 @@ SCAM_REGEX = re.compile(
 
 
 class ScamBanner(vbu.Cog):
-        
+
     @vbu.Cog.listener()
     async def on_message(self, message: discord.Message):
 
         # Ignore DMs
         if message.guild is None:
             return
-        if message.guild.id != 738753442461253633:
+        if message.guild.id != 800996069525028944:
             return
 
         # Ignore people with roles
@@ -36,9 +36,12 @@ class ScamBanner(vbu.Cog):
             return
 
         # See if we match
-        SCAM_REGEX.search(message.content)
+        match = SCAM_REGEX.search(message.content)
         if not match:
             return
+
+        matched_domain = match.group(2).lower(
+            ).replace('https://', '').replace('http://', '')
 
         # Leave the legit links alone
         valid_links = [
@@ -47,12 +50,13 @@ class ScamBanner(vbu.Cog):
             "discord.com",
             "discord.gg",
         ]
-        if match.group(4).lower() in valid_links:
+        if matched_domain in valid_links:
             return
 
         # Ban the user
         try:
-            await message.author.ban(reason=f"Suspected scam link ({match.group(3)})")
+            await message.author.ban(
+                reason=f"Suspected scam link ({matched_domain})")
         except discord.HTTPException:
             pass
 
