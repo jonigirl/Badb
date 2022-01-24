@@ -42,8 +42,7 @@ class TicketCog(commands.Cog):
         contentTwo: str = "\uFEFF",
         color=0x808080,
         timestamp=None,
-        file: discord.File = None,
-    ):
+        file: discord.File = None,):
         embed = discord.Embed(title=contentOne, description=contentTwo, color=color)
         if timestamp:
             embed.timestamp = timestamp
