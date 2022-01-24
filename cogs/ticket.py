@@ -195,7 +195,7 @@ class TicketCog(commands.Cog):
                 await ctx.channel.delete()
                 index = data["ticket-channel-ids"].index(channel_id)
                 del data["ticket-channel-ids"][index]
-                with open("data.json", "w") as f:
+                with open("data/tickets.json", "w") as f:
                     json.dump(data, f)
                 fileObject = discord.File(f"tickets/{ticket_name}.txt")
                 for user in ctx.channel.members:
@@ -247,7 +247,7 @@ class TicketCog(commands.Cog):
                     data["ticket-support-roles"].append(str(role_id.id))
                     if str(mentionRole) == "true":
                         data["roles-to-mention"].append(str(role_id.id))
-                    with open("data.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
                     em = discord.Embed(
                         title="Add support",
@@ -316,7 +316,7 @@ class TicketCog(commands.Cog):
                     index = valid_roles.index(str(role_id.id))
                     del valid_roles[index]
                     data["ticket-support-roles"] = valid_roles
-                    with open("data.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
                     em = discord.Embed(
                         title="Delete Support",
@@ -385,7 +385,7 @@ class TicketCog(commands.Cog):
 
                     data["roles-to-mention"].append(str(role_id.id))
 
-                    with open("data.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
 
                     em = discord.Embed(
@@ -461,7 +461,7 @@ class TicketCog(commands.Cog):
 
                     data["roles-to-mention"] = pinged_roles
 
-                    with open("data.json", "w") as f:
+                    with open("data/tickets.json", "w") as f:
                         json.dump(data, f)
 
                     em = discord.Embed(
