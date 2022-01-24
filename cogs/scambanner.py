@@ -1,8 +1,8 @@
 import re
 
 import discord
-
 from discord.ext import vbu
+
 
 SCAM_REGEX = re.compile(
     r"""
@@ -10,7 +10,7 @@ SCAM_REGEX = re.compile(
         .+?
         (
             (https?://)(\S*?)
-              (
+            (
                 ((?:d|cl)s?[li](?:sc|cs|zc|cz|s|c|sck)r?oc?r?c?(?:d|cl)?s?)
                 (\S*?)\.
                 (com|pw|org|app|info|net|gift|codes|click|club)
@@ -44,9 +44,8 @@ class ScamBanner(vbu.Cog):
         match = SCAM_REGEX.search(message.content)
         if not match:
             return
-
+        
         matched_domain = match.group(5).lower()
-            ).replace('https://', '').replace('http://', '')
 
         # Leave the legit links alone
         valid_links = [
@@ -60,8 +59,7 @@ class ScamBanner(vbu.Cog):
 
         # Ban the user
         try:
-            await message.author.ban(
-                reason=f"Suspected scam link ({matched_domain})")
+            await message.author.ban(reason=f"Suspected scam link ({matched_domain})")
         except discord.HTTPException:
             pass
 
@@ -69,3 +67,4 @@ class ScamBanner(vbu.Cog):
 def setup(bot: vbu.Bot):
     x = ScamBanner(bot)
     bot.add_cog(x)
+    
