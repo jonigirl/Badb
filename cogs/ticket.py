@@ -6,7 +6,7 @@ from discord.ext import commands
 from discord.ext import vbu
 
 # editable parameters
-data_file_name = "data/tickets.json"
+data_file_name = "tickets.json"
 
 
 class TicketCog(commands.Cog):
